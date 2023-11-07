@@ -36,6 +36,19 @@ public class UserServiceImpl implements UserService {
                 Arrays.asList(role));
         userRepository.save(user);
     }
+    public User authenticateUser(String email, String password) {
+        // Implement your logic to authenticate the user here
+        // You can use your UserRepository or any other method to check the user's credentials
+        // For simplicity, we'll assume you have a UserRepository.
+
+        User user = userRepository.findByEmail(email);
+
+        if (user != null && user.getPassword().equals(password)) {
+            return user; // Authentication successful
+        } else {
+            return null; // Authentication failed
+        }
+    }
 
     @Override
     public User findUserByEmail(String email) {
