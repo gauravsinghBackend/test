@@ -28,6 +28,8 @@ public class User {
     private String phone;
     @Column(nullable = false)
     private String password;
+    @Column
+    private boolean isPasswordLess;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",

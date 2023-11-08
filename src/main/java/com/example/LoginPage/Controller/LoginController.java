@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,7 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserDto userDto) {
         // Check if the user with the given email and password exists in the database
+//        User existingUser = userServiceImpl.authenticateUser(userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()));
         User existingUser = userServiceImpl.authenticateUser(userDto.getEmail(), userDto.getPassword());
 
         if (existingUser == null) {
@@ -57,6 +59,11 @@ public class LoginController {
             // Return a success response
             return new ResponseEntity<>("User Registered Successfully", HttpStatus.OK);
         }
+
+    }
+    @GetMapping("/user")
+    public ResponseEntity<String > getUser(){
+        return new ResponseEntity<>("UserExists",HttpStatus.OK);
     }
 
 }

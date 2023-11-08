@@ -9,6 +9,10 @@ import com.example.LoginPage.Models.User;
 import com.example.LoginPage.Repository.RoleRepository;
 import com.example.LoginPage.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +27,8 @@ public class UserServiceImpl {
     @Autowired
     private RoleRepository roleRepository;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void saveUser(SignupDto userDto) {
         Role role = roleRepository.findByName(TbConstants.Roles.USER);
@@ -36,7 +40,8 @@ public class UserServiceImpl {
         user.setName(userDto.getName());
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword()); // password encoder will be used here
+        user.setPassword(this.bCryptPasswordEncoder.encode(userDto.getPassword())); // password encoder will be used here
+//        user.setPassword(userDto.getPassword());
         user.setRoles(Arrays.asList(role));
         userRepository.save(user);
     }
@@ -49,4 +54,23 @@ public class UserServiceImpl {
             return null; // Authentication failed
         }
     }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User user = userRepository.findByEmail(username);
+//
+//        if (user == null) {
+//            throw new UsernameNotFoundException("User not found with email: " + username);
+//        }
+
+        // You should convert your User entity to UserDetails (e.g., org.springframework.security.core.userdetails.User).
+        // Ensure that you provide the user's username (email), password, and authorities (roles).
+//        user.setName(username);
+//        return user;
+//                User.builder()
+//                .username(user.getEmail()) // This should be the email
+//                .password(user.getPassword()) // The user's password (make sure it's hashed)
+//                .authorities(user.getRoles()) // Set the user's roles/authorities
+//                .build();
+//    }
 }
