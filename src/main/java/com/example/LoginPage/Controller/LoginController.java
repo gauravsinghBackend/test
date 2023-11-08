@@ -38,32 +38,25 @@ public class LoginController {
         }
     }
 
-//    @GetMapping("/registration")
-//    public String registrationForm(Model model) {
-//        UserDto user = new UserDto();
-//        model.addAttribute("user", user);
-//        return "registration";
-//    }
-//
-@PostMapping("/signup")
-public ResponseEntity<String> registration(@RequestBody SignupDto signupDto) {
-    // Check if the user with the given email already exists in the database
-    User existingUser = userRepository.findByEmail(signupDto.getEmail());
+    @PostMapping("/signup")
+    public ResponseEntity<String> registration(@RequestBody SignupDto signupDto) {
+        // Check if the user with the given email already exists in the database
+        User existingUser = userRepository.findByEmail(signupDto.getEmail());
 
-    if (existingUser != null) {
-        // User with the same email already exists
-        return new ResponseEntity<>("User Already Exists", HttpStatus.OK);
-    } else {
-        // User does not exist, so save the new user to the database
-//        User user = new User();
-//        user.setName(signupDto.getName());
-//        user.setEmail(signupDto.getEmail());
-//        user.setPassword(signupDto.getPassword());
-//        user.setPhone(signupDto.getPhone());
-        userServiceImpl.saveUser(signupDto);
-        // Return a success response
-        return new ResponseEntity<>("User Registered Successfully", HttpStatus.OK);
+        if (existingUser != null) {
+            // User with the same email already exists
+            return new ResponseEntity<>("User Already Exists", HttpStatus.OK);
+        } else {
+            // User does not exist, so save the new user to the database
+    //        User user = new User();
+    //        user.setName(signupDto.getName());
+    //        user.setEmail(signupDto.getEmail());
+    //        user.setPassword(signupDto.getPassword());
+    //        user.setPhone(signupDto.getPhone());
+            userServiceImpl.saveUser(signupDto);
+            // Return a success response
+            return new ResponseEntity<>("User Registered Successfully", HttpStatus.OK);
+        }
     }
-}
 
 }

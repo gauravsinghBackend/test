@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/user/")
 public class UserController {
+
+    //Not required for now
     @GetMapping("/")
     public String registrationForm() {
-        return "user";
+        return null;
     }
 }
