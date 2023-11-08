@@ -1,6 +1,7 @@
 package com.example.LoginPage.Service;
 
 
+import com.example.LoginPage.DTO.SignupDto;
 import com.example.LoginPage.DTO.UserDto;
 import com.example.LoginPage.Models.Role;
 import com.example.LoginPage.Models.TbConstants;
@@ -25,17 +26,20 @@ public class UserServiceImpl {
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
 
-//    @Override
-//    public void saveUser(UserDto userDto) {
-//        Role role = roleRepository.findByName(TbConstants.Roles.USER);
-//
-//        if (role == null)
-//            role = roleRepository.save(new Role(TbConstants.Roles.USER));
-//
-//        User user = new User(userDto.getName(), userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()),
-//                Arrays.asList(role));
-//        userRepository.save(user);
-//    }
+    public void saveUser(SignupDto userDto) {
+        Role role = roleRepository.findByName(TbConstants.Roles.USER);
+
+        if (role == null)
+            role = roleRepository.save(new Role(TbConstants.Roles.USER));
+
+        User user = new User();
+        user.setName(userDto.getName());
+        user.setPhone(userDto.getPhone());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword()); // password encoder will be used here
+        user.setRoles(Arrays.asList(role));
+        userRepository.save(user);
+    }
     public User authenticateUser(String email, String password) {
         User user = userRepository.findByEmail(email);
         //Here we need to convert incoming password in requestBody to Bcrypt than compare it.

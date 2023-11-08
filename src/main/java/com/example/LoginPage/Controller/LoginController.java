@@ -1,7 +1,9 @@
 package com.example.LoginPage.Controller;
 
+import com.example.LoginPage.DTO.SignupDto;
 import com.example.LoginPage.DTO.UserDto;
 import com.example.LoginPage.Models.User;
+import com.example.LoginPage.Repository.UserRepository;
 import com.example.LoginPage.Service.UserService;
 import com.example.LoginPage.Service.UserServiceImpl;
 import jakarta.validation.Valid;
@@ -19,6 +21,8 @@ public class LoginController {
     private UserServiceImpl userServiceImpl;
 //    @Autowired
 //    private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserDto userDto) {
@@ -41,23 +45,25 @@ public class LoginController {
 //        return "registration";
 //    }
 //
-//    @PostMapping("/registration")
-//    public String registration(
-//            @Valid @ModelAttribute("user") UserDto userDto,
-//            BindingResult result,
-//            Model model) {
-//        User existingUser = userService.findUserByEmail(userDto.getEmail());
-//
-//        if (existingUser != null)
-//            result.rejectValue("email", null,
-//                    "User already registered !!!");
-//
-//        if (result.hasErrors()) {
-//            model.addAttribute("user", userDto);
-//            return "/registration";
-//        }
-//
-//        userService.saveUser(userDto);
-//        return "redirect:/registration?success";
-//    }
+@PostMapping("/signup")
+public ResponseEntity<String> registration(@RequestBody SignupDto signupDto) {
+    // Check if the user with the given email already exists in the database
+    User existingUser = userRepository.findByEmail(signupDto.getEmail());
+
+    if (existingUser != null) {
+        // User with the same email already exists
+        return new ResponseEntity<>("User Already Exists", HttpStatus.OK);
+    } else {
+        // User does not exist, so save the new user to the database
+//        User user = new User();
+//        user.setName(signupDto.getName());
+//        user.setEmail(signupDto.getEmail());
+//        user.setPassword(signupDto.getPassword());
+//        user.setPhone(signupDto.getPhone());
+        userServiceImpl.saveUser(signupDto);
+        // Return a success response
+        return new ResponseEntity<>("User Registered Successfully", HttpStatus.OK);
+    }
+}
+
 }
