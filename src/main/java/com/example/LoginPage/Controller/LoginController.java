@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
     @Autowired
     private UserServiceImpl userServiceImpl;
-    @Autowired
-    private UserService userService;
+//    @Autowired
+//    private UserService userService;
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserDto userDto) {
@@ -34,30 +34,30 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/registration")
-    public String registrationForm(Model model) {
-        UserDto user = new UserDto();
-        model.addAttribute("user", user);
-        return "registration";
-    }
-
-    @PostMapping("/registration")
-    public String registration(
-            @Valid @ModelAttribute("user") UserDto userDto,
-            BindingResult result,
-            Model model) {
-        User existingUser = userService.findUserByEmail(userDto.getEmail());
-
-        if (existingUser != null)
-            result.rejectValue("email", null,
-                    "User already registered !!!");
-
-        if (result.hasErrors()) {
-            model.addAttribute("user", userDto);
-            return "/registration";
-        }
-
-        userService.saveUser(userDto);
-        return "redirect:/registration?success";
-    }
+//    @GetMapping("/registration")
+//    public String registrationForm(Model model) {
+//        UserDto user = new UserDto();
+//        model.addAttribute("user", user);
+//        return "registration";
+//    }
+//
+//    @PostMapping("/registration")
+//    public String registration(
+//            @Valid @ModelAttribute("user") UserDto userDto,
+//            BindingResult result,
+//            Model model) {
+//        User existingUser = userService.findUserByEmail(userDto.getEmail());
+//
+//        if (existingUser != null)
+//            result.rejectValue("email", null,
+//                    "User already registered !!!");
+//
+//        if (result.hasErrors()) {
+//            model.addAttribute("user", userDto);
+//            return "/registration";
+//        }
+//
+//        userService.saveUser(userDto);
+//        return "redirect:/registration?success";
+//    }
 }

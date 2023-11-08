@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl {
 
     @Autowired
     private UserRepository userRepository;
@@ -22,27 +22,23 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
-    @Override
-    public void saveUser(UserDto userDto) {
-        Role role = roleRepository.findByName(TbConstants.Roles.USER);
-
-        if (role == null)
-            role = roleRepository.save(new Role(TbConstants.Roles.USER));
-
-        User user = new User(userDto.getName(), userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()),
-                Arrays.asList(role));
-        userRepository.save(user);
-    }
+//    @Override
+//    public void saveUser(UserDto userDto) {
+//        Role role = roleRepository.findByName(TbConstants.Roles.USER);
+//
+//        if (role == null)
+//            role = roleRepository.save(new Role(TbConstants.Roles.USER));
+//
+//        User user = new User(userDto.getName(), userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()),
+//                Arrays.asList(role));
+//        userRepository.save(user);
+//    }
     public User authenticateUser(String email, String password) {
-        // Implement your logic to authenticate the user here
-        // You can use your UserRepository or any other method to check the user's credentials
-        // For simplicity, we'll assume you have a UserRepository.
-
         User user = userRepository.findByEmail(email);
-
+        //Here we need to convert incoming password in requestBody to Bcrypt than compare it.
         if (user != null && user.getPassword().equals(password)) {
             return user; // Authentication successful
         } else {
@@ -50,8 +46,9 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+//    @Override
+//    public User findUserByEmail(String email) {
+//
+//        return userRepository.findByEmail(email);
+//    }
 }
