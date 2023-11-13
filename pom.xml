@@ -88,11 +88,10 @@
 			<artifactId>spring-security-crypto</artifactId>
 			<version>5.6.1</version> <!-- Replace with the desired version -->
 		</dependency>
-<!--		THIS WILL BE DELETED AS PER OUR REQUIREMENT-->
 		<dependency>
-			<groupId>com.twilio.sdk</groupId>
-			<artifactId>twilio</artifactId>
-			<version>8.33.0</version> <!-- Use the latest version available -->
+			<groupId>com.plivo</groupId>
+			<artifactId>plivo-java</artifactId>
+			<version>5.9.3</version>
 		</dependency>
 	</dependencies>
 

@@ -27,8 +27,8 @@ public class UserServiceImpl {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void saveUser(SignupDto userDto) {
         Role role = roleRepository.findByName(TbConstants.Roles.USER);
@@ -40,8 +40,8 @@ public class UserServiceImpl {
         user.setName(userDto.getName());
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
-        user.setPassword(this.bCryptPasswordEncoder.encode(userDto.getPassword())); // password encoder will be used here
-//        user.setPassword(userDto.getPassword());
+//        user.setPassword(this.bCryptPasswordEncoder.encode(userDto.getPassword())); // password encoder will be used here
+        user.setPassword(userDto.getPassword());
         user.setRoles(Arrays.asList(role));
         userRepository.save(user);
     }

@@ -66,4 +66,9 @@ public class LoginController {
         return new ResponseEntity<>("UserExists",HttpStatus.OK);
     }
 
+    @PostMapping("/test-controller")
+    public ResponseEntity<String> testController(){
+        return new ResponseEntity<>("Test-Controller reached",HttpStatus.OK);
+    }
+
 }
