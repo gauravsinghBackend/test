@@ -1,4 +1,4 @@
-package OneTimePassword.OTPservice;
+package com.example.LoginPage.OneTimePassword.OTPservice;
 import com.plivo.api.Plivo;
 import com.plivo.api.exceptions.PlivoRestException;
 import com.plivo.api.models.message.Message;
@@ -18,15 +18,15 @@ public class PlivoService {
     @Value("${plivo.phone.number}")
     private String plivoPhoneNumber;
 
-    public void sendSms(String to) {
+    public String sendSms(String to) {
+        String otp=new String();
         try {
-            String otp = generateOtp();
+            otp=generateOtp();
 //            MessageCreateResponse response = Message.creator(to, plivoPhoneNumber, "OTP send successfully");
-
-//            System.out.println("Plivo Message SID: " + response.messageUuid);
         } catch (Exception ex) {
             System.out.println("sorry");
         }
+        return otp;
     }
     public static String generateOtp() {
         // Generate a 4-digit random OTP
