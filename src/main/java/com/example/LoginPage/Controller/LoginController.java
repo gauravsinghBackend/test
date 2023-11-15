@@ -1,5 +1,6 @@
 package com.example.LoginPage.Controller;
 
+import com.example.LoginPage.DTO.ForgetPasswordDto;
 import com.example.LoginPage.DTO.SignupDto;
 import com.example.LoginPage.DTO.UserDto;
 import com.example.LoginPage.Models.User;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class LoginController {
@@ -43,9 +46,9 @@ public class LoginController {
     @PostMapping("/signup")
     public ResponseEntity<String> registration(@RequestBody SignupDto signupDto) {
         // Check if the user with the given email already exists in the database
-        User existingUser = userRepository.findByEmail(signupDto.getEmail());
+        Optional<User> existingUser = userRepository.findByEmail(signupDto.getEmail());
 
-        if (existingUser != null) {
+        if (existingUser.isPresent()) {
             // User with the same email already exists
             return new ResponseEntity<>("User Already Exists", HttpStatus.OK);
         } else {
@@ -70,5 +73,11 @@ public class LoginController {
     public ResponseEntity<String> testController(){
         return new ResponseEntity<>("Test-Controller reached",HttpStatus.OK);
     }
+
+//    @PostMapping ("/forgot-password")
+//    public ResponseEntity<String> CheckEmail(@RequestBody ForgetPasswordDto forgetPasswordDto)
+//    {
+//        forgetPasswordDto.checkPassword(forgetPasswordDto)
+//    }
 
 }

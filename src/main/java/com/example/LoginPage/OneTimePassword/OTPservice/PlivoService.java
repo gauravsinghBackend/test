@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.Random;
 
@@ -61,13 +62,20 @@ public class PlivoService {
         //OTP if single time user inserts OTP;
         Optional<OTP> fetchedOtp = otpRepository.findByPhone(phone);
         OTP retrievedOtp= fetchedOtp.get();
-        if (retrievedOtp.getPhone()!=null && retrievedOtp.getOtp().equals(otp)) {
+        LocalDateTime currentTime = LocalDateTime.now();
+        /*
+        Validations: 1. Check if fetchedOtp is null or invalid number is passed
+                     2. Compare both the OTPs incoming and Database (valid or not)
+                     3. Check if OTP is expired or not;
+                     4. Latest OTP only be checked remaining will be invalid/Resend OTP as latest OTP
+        */
+        if (retrievedOtp.getPhone()!=null && retrievedOtp.getOtp().equals(otp) && ChronoUnit.MINUTES.between(retrievedOtp.getExpiryTime(), currentTime)<=5) {
             return true;
         }
         return false;
-
-//       Compare it with expiration time;
     }
 }
-
-
+//    LocalDateTime currentTime = LocalDateTime.now();
+//    Calculate the time difference in minutes
+//    long minutesDifference = ChronoUnit.MINUTES.between(savedTime, currentTime);
+//    return minutesDifference <= 5;

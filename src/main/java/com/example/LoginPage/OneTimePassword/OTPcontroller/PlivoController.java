@@ -32,7 +32,7 @@ public class PlivoController {
                 String otp = plivoService.sendSms(smsRequest.getPhone());
                 return new ResponseEntity<>("OTP generated successfully! " + otp, HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("User not found for phone: " + smsRequest.getPhone(), HttpStatus.OK);
+                return new ResponseEntity<>("User not found for phone: " + smsRequest.getPhone(), HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             e.printStackTrace();

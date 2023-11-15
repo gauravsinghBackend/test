@@ -88,6 +88,18 @@
 			<artifactId>spring-security-crypto</artifactId>
 			<version>5.6.1</version> <!-- Replace with the desired version -->
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+<!--		<dependency>-->
+<!--			<groupId>javax.mail</groupId>-->
+<!--			<artifactId>mail</artifactId>-->
+<!--			<version>1.4</version>-->
+<!--		</dependency>-->
+<!--		Dependency to send Mail-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>com.plivo</groupId>
 			<artifactId>plivo-java</artifactId>

@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl {
@@ -46,10 +47,11 @@ public class UserServiceImpl {
         userRepository.save(user);
     }
     public User authenticateUser(String email, String password) {
-        User user = userRepository.findByEmail(email);
+        Optional<User> user = userRepository.findByEmail(email);
+        User AuthenticatedUser =user.get();
         //Here we need to convert incoming password in requestBody to Bcrypt than compare it.
-        if (user != null && user.getPassword().equals(password)) {
-            return user; // Authentication successful
+        if (user != null && AuthenticatedUser.getPassword().equals(password)) {
+            return AuthenticatedUser; // Authentication successful
         } else {
             return null; // Authentication failed
         }
