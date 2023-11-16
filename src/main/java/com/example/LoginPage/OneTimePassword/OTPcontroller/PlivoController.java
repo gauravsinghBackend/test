@@ -16,7 +16,7 @@ import java.util.Optional;
 @RestController
 public class PlivoController {
 
-    private final PlivoService plivoService;
+    private PlivoService plivoService;
     private final UserRepository userRepository;
 
     @Autowired

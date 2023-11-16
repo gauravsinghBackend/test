@@ -48,15 +48,20 @@ public class PasswordResetTokenService {
         return String.valueOf(otp);
     }
     public void SendEmail(String to, String body, String subject){
+
+        String deepLink = "http://localhost:8080/reset-password?token=" + generateResetToken();
         SimpleMailMessage simpleMailMessage=new SimpleMailMessage();
         simpleMailMessage.setTo(to);
         simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText(body);
+        simpleMailMessage.setText(body+deepLink);
         javaMailSender.send(simpleMailMessage);
     }
 //    @EventListener(ApplicationContext.class)
 //    public void MailInitiate(){
 //        SendEmail();
 //    }
+    public String generateResetToken() {
+        return UUID.randomUUID().toString();
+    }
 }
 

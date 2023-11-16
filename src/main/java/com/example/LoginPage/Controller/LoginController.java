@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/v1.0/user")
 public class LoginController {
     @Autowired
     private UserServiceImpl userServiceImpl;
