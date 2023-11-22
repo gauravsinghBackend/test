@@ -42,7 +42,7 @@ public class UserServiceImpl {
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
 //        user.setPassword(this.bCryptPasswordEncoder.encode(userDto.getPassword())); // password encoder will be used here
-        user.setPassword(userDto.getPassword());
+//        user.setPassword(userDto.getPassword());
         user.setRoles(Arrays.asList(role));
         userRepository.save(user);
     }

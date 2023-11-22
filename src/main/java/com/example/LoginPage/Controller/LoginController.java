@@ -52,7 +52,7 @@ public class LoginController {
 
         if (existingUser.isPresent()) {
             // User with the same email already exists
-            return new ResponseEntity<>("User Already Exists", HttpStatus.OK);
+            return new ResponseEntity<>("User Already Exists", HttpStatus.FOUND);
         } else {
             // User does not exist, so save the new user to the database
     //        User user = new User();
