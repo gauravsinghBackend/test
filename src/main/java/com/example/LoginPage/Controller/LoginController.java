@@ -20,7 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v1.0/user")
+@CrossOrigin
+@RequestMapping("/v1.0/users")
 public class LoginController {
     @Autowired
     private UserServiceImpl userServiceImpl;
@@ -70,7 +71,7 @@ public class LoginController {
         return new ResponseEntity<>("UserExists",HttpStatus.OK);
     }
 
-    @PostMapping("/test-controller")
+    @GetMapping("/test-controller")
     public ResponseEntity<String> testController(){
         return new ResponseEntity<>("Test-Controller reached",HttpStatus.OK);
     }
@@ -80,5 +81,4 @@ public class LoginController {
 //    {
 //        forgetPasswordDto.checkPassword(forgetPasswordDto)
 //    }
-
 }

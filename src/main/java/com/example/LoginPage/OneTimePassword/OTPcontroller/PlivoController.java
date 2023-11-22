@@ -17,7 +17,7 @@ import java.util.Optional;
 public class PlivoController {
 
     private PlivoService plivoService;
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     public PlivoController(PlivoService plivoService, UserRepository userRepository) {
@@ -28,12 +28,13 @@ public class PlivoController {
     public ResponseEntity<String> sendSms(@RequestBody SmsRequest smsRequest) {
         User user = userRepository.findByPhone(smsRequest.getPhone());
         try {
-            if (user != null) {
+            //It will get Changed for NEW VERSION of Figma
+//            if (user != null) {
                 String otp = plivoService.sendSms(smsRequest.getPhone());
                 return new ResponseEntity<>("OTP generated successfully! " + otp, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("User not found for phone: " + smsRequest.getPhone(), HttpStatus.NOT_FOUND);
-            }
+//            } else {
+//                return new ResponseEntity<>("User not found for phone: " + smsRequest.getPhone(), HttpStatus.NOT_FOUND);
+//            }
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>("Error generating OTP: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -43,7 +44,7 @@ public class PlivoController {
     public ResponseEntity<String> validateOtp(@RequestBody OtpValidation otpValidation) {
         boolean otpEntityOptional = plivoService.ValidateOtpService(otpValidation.getPhone(),otpValidation.getOtp());
         if (otpEntityOptional) {
-            return ResponseEntity.ok("OTP is valid.");
+            return ResponseEntity.ok("OTP verified successfully.");
         } else {
             return ResponseEntity.badRequest().body("Invalid OTP.");
         }

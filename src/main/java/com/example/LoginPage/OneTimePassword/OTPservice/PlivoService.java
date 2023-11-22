@@ -1,11 +1,14 @@
 package com.example.LoginPage.OneTimePassword.OTPservice;
 import com.example.LoginPage.OneTimePassword.OTPmodel.OTP;
 import com.example.LoginPage.OneTimePassword.OtpRepository.OtpRepository;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -14,19 +17,25 @@ import java.util.Random;
 
 @Service
 public class PlivoService {
-
-//    @Autowired
-//    private Plivo plivo;
-//    @Autowired
-//    private Message message;
-
-    @Value("${plivo.phone.number}")
-    private String plivoPhoneNumber;
     @Autowired
     private OtpRepository otpRepository;
+    @Value("${twilio.AccountSid}")
+    private String authId;
+
+    //    @Value("${plivo.auth.token}")
+//    private String authToken;
+    @Value("${twilio.AuthToken}")
+    private String authToken;
+
+    @Value("${twilio.phoneNumber}")
+    private String phoneNumber;
+    @Value("${twilio.sendMessage}")
+    private String sendMessage;
 
     public String sendSms(String to) {
 //    public MessageCreateResponse sendSms(String to) {
+        // Initialize the Twilio client
+        Twilio.init(authId, authToken);
         String otp=new String();
         try {
 //            Plivo.init("MAYZHJOTLHODQXMZM3NM","ZjYxZTE3MTc5NzZkMmE4MmU4OGQ0NGRiODkwZjhj");
@@ -36,10 +45,10 @@ public class PlivoService {
             obj.setExpiryTime(LocalDateTime.now());
             obj.setPhone(to);
             otpRepository.save(obj);
-
-//            MessageCreateResponse response = message.creator("8090564705", to, "OTP send successfully"+otp);
+            Message message=Message.creator(new com.twilio.type.PhoneNumber(to), new com.twilio.type.PhoneNumber(phoneNumber), otp+" "+sendMessage).create();
+//            MessageCreateResponse response = message.creator("8090564705", to, otp+sendMessage);
         } catch (Exception ex) {
-            System.out.println("sorry");
+            System.out.println("Something went wrong");
         }
         return otp;
 //        return response;
@@ -50,14 +59,6 @@ public class PlivoService {
         int otp = 1_000 + random.nextInt(9_000);
         return String.valueOf(otp);
     }
-    //This method will be hit by plivo to see that sms delivered or not:
-//    @PostMapping("/sms_status")
-//    public ResponseEntity<String> handleSmsStatus(@RequestBody String smsStatus) {
-//        // Handle the SMS delivery status
-//        System.out.println("Received SMS Status: " + smsStatus);
-//        // You can perform additional processing based on the received status
-//        return ResponseEntity.ok("Received SMS Status");
-//    }
     public  boolean ValidateOtpService(String phone, String otp){
         //OTP if single time user inserts OTP;
         Optional<OTP> fetchedOtp = otpRepository.findByPhone(phone);
