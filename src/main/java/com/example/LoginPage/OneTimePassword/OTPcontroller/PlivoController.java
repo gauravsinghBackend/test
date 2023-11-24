@@ -9,11 +9,12 @@ import com.example.LoginPage.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@RestController
+@Controller
 public class PlivoController {
 
     private PlivoService plivoService;
@@ -24,8 +25,9 @@ public class PlivoController {
         this.plivoService = plivoService;
         this.userRepository = userRepository;
     }
-    @PostMapping("/otp")
-    public ResponseEntity<String> sendSms(@RequestBody SmsRequest smsRequest) {
+//    @PostMapping("/otp")
+//    public ResponseEntity<String> sendSms(@RequestBody SmsRequest smsRequest) {
+public ResponseEntity<String> sendSms(SmsRequest smsRequest) {
         User user = userRepository.findByPhone(smsRequest.getPhone());
         try {
             //It will get Changed for NEW VERSION of Figma
@@ -40,15 +42,15 @@ public class PlivoController {
             return new ResponseEntity<>("Error generating OTP: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PostMapping("/verify")
-    public ResponseEntity<String> validateOtp(@RequestBody OtpValidation otpValidation) {
-        boolean otpEntityOptional = plivoService.ValidateOtpService(otpValidation.getPhone(),otpValidation.getOtp());
-        if (otpEntityOptional) {
-            return ResponseEntity.ok("OTP verified successfully.");
-        } else {
-            return ResponseEntity.badRequest().body("Invalid OTP.");
-        }
-    }
+//    @PostMapping("/verify")
+//    public ResponseEntity<String> validateOtp(@RequestBody OtpValidation otpValidation) {
+//        boolean otpEntityOptional = plivoService.ValidateOtpService(otpValidation.getPhone(),otpValidation.getOtp());
+//        if (otpEntityOptional) {
+//            return ResponseEntity.ok("OTP verified successfully.");
+//        } else {
+//            return ResponseEntity.badRequest().body("Invalid OTP.");
+//        }
+//    }
 }
 
 

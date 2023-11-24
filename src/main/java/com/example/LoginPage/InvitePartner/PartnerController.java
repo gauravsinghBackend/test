@@ -32,6 +32,4 @@ public class PartnerController {
             return new ResponseEntity<>("Error inviting partner: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 }

@@ -14,10 +14,8 @@ public class PasswordResetTokenDto {
 
     @Id
     private String token;
-
     @ManyToOne
     private User user;
-
     private LocalDateTime expiryDate;
     // Method to create a new token
 }

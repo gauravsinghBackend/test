@@ -2,18 +2,12 @@ package com.example.LoginPage.Service;
 
 
 import com.example.LoginPage.DTO.SignupDto;
-import com.example.LoginPage.DTO.UserDto;
 import com.example.LoginPage.Models.Role;
 import com.example.LoginPage.Models.TbConstants;
 import com.example.LoginPage.Models.User;
 import com.example.LoginPage.Repository.RoleRepository;
 import com.example.LoginPage.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -42,20 +36,26 @@ public class UserServiceImpl {
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
 //        user.setPassword(this.bCryptPasswordEncoder.encode(userDto.getPassword())); // password encoder will be used here
-//        user.setPassword(userDto.getPassword());
+        user.setPassword(userDto.getPassword());
         user.setRoles(Arrays.asList(role));
         userRepository.save(user);
     }
-    public User authenticateUser(String email, String password) {
-        Optional<User> user = userRepository.findByEmail(email);
-        User AuthenticatedUser =user.get();
+//    public User authenticateUser(String email, String password) {
+public User authenticateUser(String phone) {
+//        Optional<User> user = userRepository.findByEmail(email);
+    User user = userRepository.findByPhone(phone);
+//        User AuthenticatedUser =user.get();
         //Here we need to convert incoming password in requestBody to Bcrypt than compare it.
-        if (user != null && AuthenticatedUser.getPassword().equals(password)) {
-            return AuthenticatedUser; // Authentication successful
-        } else {
-            return null; // Authentication failed
-        }
+//        if (user != null && AuthenticatedUser.getPassword().equals(password)) {
+//            return AuthenticatedUser; // Authentication successful
+//        } else {
+//            return null; // Authentication failed
+//        }
+
+//    return fetchedUser;
+    return user;
     }
+
 
 //    @Override
 //    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
