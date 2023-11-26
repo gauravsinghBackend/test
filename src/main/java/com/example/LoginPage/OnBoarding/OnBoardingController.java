@@ -30,4 +30,34 @@ public class OnBoardingController {
         }
 
     }
+    @PostMapping("/pregnanttrue")
+    public ResponseEntity<PregnantTrueResponseDto> PregnantTrue(@RequestHeader("Authorization") String header, @RequestBody PregnantTrueRequestDto pregnantTrueRequestDto) throws Exception {
+        try{
+            return onBoardingService.PregnantTrue(header,pregnantTrueRequestDto);
+        }
+        catch(Exception e)
+        {
+            throw new Exception();
+        }
+    }
+    @PostMapping("/isfirstpregnancy")
+    public ResponseEntity<FirstPregnancyResponseDto> FirstPregnancy(@RequestHeader("Authorization") String header, @RequestBody FirstPregnancyRequestDto firstPregnancyRequestDto) throws Exception {
+        try{
+            return onBoardingService.FirstPregnancy(header,firstPregnancyRequestDto);
+        }
+        catch(Exception e)
+        {
+            throw new Exception();
+        }
+    }
+    @PostMapping("/havekids")
+    public ResponseEntity<HaveKidsResponseDto> HaveKids(@RequestHeader("Authorization") String header, @RequestBody HaveKidsRequestDto haveKidsRequestDto) throws Exception {
+        try{
+            return onBoardingService.HaveKids(header,haveKidsRequestDto);
+        }
+        catch(Exception e)
+        {
+            throw new Exception();
+        }
+    }
 }

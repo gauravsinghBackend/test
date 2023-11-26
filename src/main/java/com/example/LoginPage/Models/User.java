@@ -34,6 +34,9 @@ public class User {
     private ParentRole parentrole;
     private String date;
     private PregnantChildEnum pregnantorchild;
+    private String dueDate;
+    private boolean isFirstPregnancy;
+    private boolean haveKids;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",

@@ -29,6 +29,45 @@ public class OnBoardingService {
             pregnantChildResponseDto.setMessage("parentorchild updated successfully");
             return new ResponseEntity<>(pregnantChildResponseDto,HttpStatus.OK);
     }
+    public ResponseEntity<PregnantTrueResponseDto> PregnantTrue(String header, PregnantTrueRequestDto pregnantTrueRequestDto) throws Exception {
+        Optional<User> user=retrieveUserid(header);
+        PregnantTrueResponseDto pregnantChildResponseDto=new PregnantTrueResponseDto();
+        if (user.isEmpty()){
+            pregnantChildResponseDto.setMessage("User not found");
+            return new ResponseEntity<>(pregnantChildResponseDto, HttpStatus.OK);
+        }
+        User updateUser=user.get();
+        updateUser.setDueDate(pregnantTrueRequestDto.getDueDate());
+        userRepository.save(updateUser);
+        pregnantChildResponseDto.setMessage("PregnantTrue updated successfully");
+        return new ResponseEntity<>(pregnantChildResponseDto,HttpStatus.OK);
+    }
+    public ResponseEntity<FirstPregnancyResponseDto> FirstPregnancy(String header, FirstPregnancyRequestDto firstPregnancyRequestDto) throws Exception {
+        Optional<User> user=retrieveUserid(header);
+        FirstPregnancyResponseDto firstPregnancyResponseDto=new FirstPregnancyResponseDto();
+        if (user.isEmpty()){
+            firstPregnancyResponseDto.setMessage("User not found");
+            return new ResponseEntity<>(firstPregnancyResponseDto, HttpStatus.OK);
+        }
+        User updateUser=user.get();
+        updateUser.setFirstPregnancy(firstPregnancyRequestDto.isFirstPregnancy());
+        userRepository.save(updateUser);
+        firstPregnancyResponseDto.setMessage("FirstPregnancy or not updated successfully");
+        return new ResponseEntity<>(firstPregnancyResponseDto,HttpStatus.OK);
+    }
+    public ResponseEntity<HaveKidsResponseDto> HaveKids(String header, HaveKidsRequestDto haveKidsRequestDto) throws Exception {
+        Optional<User> user=retrieveUserid(header);
+        HaveKidsResponseDto haveKidsResponseDto=new HaveKidsResponseDto();
+        if (user.isEmpty()){
+            haveKidsResponseDto.setMessage("User not found");
+            return new ResponseEntity<>(haveKidsResponseDto, HttpStatus.OK);
+        }
+        User updateUser=user.get();
+        updateUser.setHaveKids(haveKidsRequestDto.isHaveKids());
+        userRepository.save(updateUser);
+        haveKidsResponseDto.setMessage("HaveKids updated successfully");
+        return new ResponseEntity<>(haveKidsResponseDto,HttpStatus.OK);
+    }
     public Optional<User> retrieveUserid(String header) throws Exception {
         //Validate if Header is null
         if (header==null) {
