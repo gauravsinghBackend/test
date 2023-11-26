@@ -11,9 +11,9 @@ public enum KidGender {
             switch (gender.toUpperCase()) {
                 case "BOY":
                     return BOY;
-                case "FEMALE":
+                case "GIRL":
                     return GIRL;
-                case "OTHER":
+                case "RATHERNOTSAY":
                     return RATHERNOTSAY;
                 // Add more cases if needed
                 default:

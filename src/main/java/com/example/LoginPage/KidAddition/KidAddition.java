@@ -40,7 +40,7 @@ public class KidAddition {
             }
             Optional<User> user = userRepository.findById(tokenData.getUserId());
             //validate if user is null
-            if (user.get().getId()==null) {
+            if (user.isEmpty()) {
                 kidResponseDto.setMeassage("User is Invalid or Null");
                 return new ResponseEntity<>(kidResponseDto,HttpStatus.OK);
             }

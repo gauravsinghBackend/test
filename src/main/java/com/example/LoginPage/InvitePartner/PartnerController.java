@@ -1,6 +1,5 @@
 package com.example.LoginPage.InvitePartner;
 
-import com.example.LoginPage.DTO.InvitePartnerRequestDto;
 //import com.example.LoginPage.Repository.TokenRepository;
 import com.example.LoginPage.Repository.TokenRepository;
 import com.example.LoginPage.Repository.UserRepository;
@@ -24,12 +23,16 @@ public class PartnerController {
     private UserRepository userRepository;
 
     @PostMapping("/invite")
-    public ResponseEntity<String> invitePartner(@RequestHeader("Authorization") String header, @RequestBody InvitePartnerRequestDto invitePartnerRequestDto) {
+    public ResponseEntity<InvitePartnerResponseDto> invitePartner(@RequestHeader("Authorization") String header, @RequestBody InvitePartnerRequestDto invitePartnerRequestDto) {
         try {
             String result = partnerService.InvitePartner(header, invitePartnerRequestDto);
-            return new ResponseEntity<>(result, HttpStatus.OK);
+            InvitePartnerResponseDto invitePartnerResponseDto=new InvitePartnerResponseDto();
+            invitePartnerResponseDto.setStatus(result);
+            return new ResponseEntity<>(invitePartnerResponseDto, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>("Error inviting partner: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            InvitePartnerResponseDto invitePartnerResponseDto=new InvitePartnerResponseDto();
+            invitePartnerResponseDto.setStatus("Error Inviting the partner");
+            return new ResponseEntity<>(invitePartnerResponseDto, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

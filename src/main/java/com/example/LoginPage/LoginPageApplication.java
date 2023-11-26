@@ -14,7 +14,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 public class LoginPageApplication {
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(LoginPageApplication.class, args);
 	}
 }

@@ -7,5 +7,5 @@ public class KidRequestDto {
     private String name;
     private String dob;
     private String profilePicture;
-    private String Gender;
+    private String gender;
 }

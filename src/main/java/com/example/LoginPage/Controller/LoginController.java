@@ -1,9 +1,12 @@
 package com.example.LoginPage.Controller;
 
 import com.example.LoginPage.DTO.ForgetPasswordDto;
+import com.example.LoginPage.DTO.SignUpResponseDto;
 import com.example.LoginPage.DTO.SignupDto;
 import com.example.LoginPage.DTO.UserDto;
+import com.example.LoginPage.Encryption.TokenData;
 import com.example.LoginPage.Encryption.TokenManager;
+import com.example.LoginPage.InvitePartner.InvitePartnerResponseDto;
 import com.example.LoginPage.Models.User;
 import com.example.LoginPage.OneTimePassword.DTO.OtpResponse;
 import com.example.LoginPage.OneTimePassword.DTO.OtpStatus;
@@ -72,25 +75,40 @@ public class LoginController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> registration(@RequestBody SignupDto signupDto) {
-        // Check if the user with the given email already exists in the database
-        Optional<User> existingUser = userRepository.findByEmail(signupDto.getEmail());
+    public ResponseEntity<SignUpResponseDto> registration(@RequestHeader("Authorization") String header, @RequestBody SignupDto signupDto) throws Exception {
+        //Check The user from Header String
+        //Extra method in token Manager needs to be made to Do these tasks
+        SignUpResponseDto signUpResponseDto=new SignUpResponseDto();
+        if (header==null) {
+            signUpResponseDto.setMeassage("Header Missing");
+            return new ResponseEntity<>(signUpResponseDto,HttpStatus.OK);
+        }
+        String token = header.substring(7);
+        TokenData tokenData = tokenManager.decryptToken(token);
+        if (tokenData==null)
+        {
+            signUpResponseDto.setMeassage("Incorrect Header");
+            return new ResponseEntity<>(signUpResponseDto,HttpStatus.OK);
+        }
+        Optional<User> user = userRepository.findById(tokenData.getUserId());
+        //validate if user is null
+        if (user.isEmpty()) {
+            signUpResponseDto.setMeassage("User is Invalid or Null");
+            return new ResponseEntity<>(signUpResponseDto,HttpStatus.OK);
+        }
 
-        if (existingUser.isPresent()) {
-            // User with the same email already exists
-            return new ResponseEntity<>("User Already Exists", HttpStatus.FOUND);
-        } else {
+        // Check if the user with the given email already exists in the database
+//        Optional<User> existingUser = userRepository.findById(user.get().getId());
             // User does not exist, so save the new user to the database
     //        User user = new User();
     //        user.setName(signupDto.getName());
     //        user.setEmail(signupDto.getEmail());
     //        user.setPassword(signupDto.getPassword());
     //        user.setPhone(signupDto.getPhone());
-            userServiceImpl.saveUser(signupDto);
+            userServiceImpl.saveUser(user, signupDto);
             // Return a success response
-            return new ResponseEntity<>("User Registered Successfully", HttpStatus.OK);
-        }
-
+        signUpResponseDto.setMeassage("User signed in successfully");
+        return new ResponseEntity<>(signUpResponseDto,HttpStatus.OK);
     }
     @GetMapping("/user")
     public ResponseEntity<String > getUser(){

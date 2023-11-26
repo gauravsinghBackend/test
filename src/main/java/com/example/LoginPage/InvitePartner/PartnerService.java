@@ -1,11 +1,8 @@
 package com.example.LoginPage.InvitePartner;
 
-import com.example.LoginPage.DTO.InvitePartnerRequestDto;
 import com.example.LoginPage.Encryption.TokenData;
 import com.example.LoginPage.Encryption.TokenManager;
-import com.example.LoginPage.Models.Partner;
 import com.example.LoginPage.Models.User;
-import com.example.LoginPage.Models.UserAuthentificationToken;
 import com.example.LoginPage.Repository.PartnerRepository;
 import com.example.LoginPage.Repository.TokenRepository;
 import com.example.LoginPage.Repository.UserRepository;

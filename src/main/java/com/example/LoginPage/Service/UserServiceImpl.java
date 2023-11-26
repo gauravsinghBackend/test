@@ -2,6 +2,7 @@ package com.example.LoginPage.Service;
 
 
 import com.example.LoginPage.DTO.SignupDto;
+import com.example.LoginPage.Models.ParentRole;
 import com.example.LoginPage.Models.Role;
 import com.example.LoginPage.Models.TbConstants;
 import com.example.LoginPage.Models.User;
@@ -25,22 +26,24 @@ public class UserServiceImpl {
 //    @Autowired
 //    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public void saveUser(SignupDto userDto) {
-        Role role = roleRepository.findByName(TbConstants.Roles.USER);
+    public void saveUser(Optional<User>user ,SignupDto signupDto) {
+//        Role role = roleRepository.findByName(TbConstants.Roles.USER);
+//
+//        if (role == null)
+//        role = roleRepository.save(new Role(TbConstants.Roles.USER));
 
-        if (role == null)
-            role = roleRepository.save(new Role(TbConstants.Roles.USER));
-
-        User user = new User();
-        user.setName(userDto.getName());
+        User user1=user.get();
+        user1.setName(signupDto.getName());
+        user1.setDate(signupDto.getDate());
+        user1.setEmail(signupDto.getEmail());
         //Phone is set Already as per new Plan
 //        user.setPhone(userDto.getPhone());
-        user.setEmail(userDto.getEmail());
 //        user.setDate(pa);
 //        user.setPassword(this.bCryptPasswordEncoder.encode(userDto.getPassword())); // password encoder will be used here
 //        user.setPassword(userDto.getPassword());
-        user.setRoles(Arrays.asList(role));
-        userRepository.save(user);
+//        user1.setRoles(Arrays.asList(role));
+        user1.setParentrole(ParentRole.fromString(signupDto.getParentrole()));
+        userRepository.save(user1);
     }
 //    public User authenticateUser(String email, String password) {
 public User authenticateUser(String phone) {

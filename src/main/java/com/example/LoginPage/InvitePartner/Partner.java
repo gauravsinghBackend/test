@@ -1,5 +1,6 @@
-package com.example.LoginPage.Models;
+package com.example.LoginPage.InvitePartner;
 
+import com.example.LoginPage.Models.User;
 import jakarta.persistence.*;
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.example.LoginPage.DTO;
+package com.example.LoginPage.InvitePartner;
 
 import lombok.Data;
 

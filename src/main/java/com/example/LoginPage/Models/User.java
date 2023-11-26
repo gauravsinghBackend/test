@@ -1,5 +1,6 @@
 package com.example.LoginPage.Models;
 
+import com.example.LoginPage.OnBoarding.PregnantChildEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,8 +31,9 @@ public class User {
 //    private String password;
 //    @Column
 //    private boolean isPasswordLess;
-    private Parent_Role parentRole;
+    private ParentRole parentrole;
     private String date;
+    private PregnantChildEnum pregnantorchild;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
