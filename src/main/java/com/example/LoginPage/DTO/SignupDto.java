@@ -1,5 +1,6 @@
 package com.example.LoginPage.DTO;
 
+import com.example.LoginPage.Models.Parent_Role;
 import lombok.Data;
 
 @Data
@@ -13,6 +14,8 @@ public class SignupDto {
     private String name;
     private String phone;
     private String email;
-    private String password;
-    private boolean isPasswordLess;
+    private String date;
+//    private String password;
+//    private boolean isPasswordLess;
+    private Parent_Role parentRole;
 }

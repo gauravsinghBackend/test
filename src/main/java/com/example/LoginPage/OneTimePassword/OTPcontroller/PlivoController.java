@@ -39,7 +39,7 @@ public ResponseEntity<String> sendSms(SmsRequest smsRequest) {
 //            }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>("Error generating OTP: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error in generating OTP: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 //    @PostMapping("/verify")

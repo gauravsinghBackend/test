@@ -33,10 +33,12 @@ public class UserServiceImpl {
 
         User user = new User();
         user.setName(userDto.getName());
-        user.setPhone(userDto.getPhone());
+        //Phone is set Already as per new Plan
+//        user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
+//        user.setDate(pa);
 //        user.setPassword(this.bCryptPasswordEncoder.encode(userDto.getPassword())); // password encoder will be used here
-        user.setPassword(userDto.getPassword());
+//        user.setPassword(userDto.getPassword());
         user.setRoles(Arrays.asList(role));
         userRepository.save(user);
     }

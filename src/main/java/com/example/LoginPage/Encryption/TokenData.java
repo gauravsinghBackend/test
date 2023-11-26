@@ -7,7 +7,7 @@ import lombok.Getter;
 public class TokenData {
     private long userId;
 
-    public TokenData(long userId) {
-        this.userId = userId;
-    }
+//    public TokenData(long userId) {
+//        this.userId = userId;
+//    }
 }

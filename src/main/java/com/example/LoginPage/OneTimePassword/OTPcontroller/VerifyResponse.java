@@ -9,4 +9,5 @@ public class VerifyResponse {
     private boolean alreadyUser;
     private boolean isOnboarded;
     private User user;
+    private String token;
 }

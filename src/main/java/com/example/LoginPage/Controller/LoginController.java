@@ -5,6 +5,8 @@ import com.example.LoginPage.DTO.SignupDto;
 import com.example.LoginPage.DTO.UserDto;
 import com.example.LoginPage.Encryption.TokenManager;
 import com.example.LoginPage.Models.User;
+import com.example.LoginPage.OneTimePassword.DTO.OtpResponse;
+import com.example.LoginPage.OneTimePassword.DTO.OtpStatus;
 import com.example.LoginPage.OneTimePassword.DTO.SmsRequest;
 import com.example.LoginPage.OneTimePassword.OTPcontroller.PlivoController;
 import com.example.LoginPage.Repository.UserRepository;
@@ -39,8 +41,8 @@ public class LoginController {
 
 
     @PostMapping("/login")
-//    public ResponseEntity<String> login(@RequestBody UserDto userDto) {
-    public ResponseEntity<String> login(@RequestBody UserDto userDto) throws Exception {
+    public ResponseEntity<OtpResponse> login(@RequestBody UserDto userDto) {
+//    public ResponseEntity<String> login(@RequestParam ("phone") String phone) throws Exception {
         // Check if the user with the given email and password exists in the database
 //        User existingUser = userServiceImpl.authenticateUser(userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()));
 //        User existingUser = userServiceImpl.authenticateUser(userDto.getEmail(), userDto.getPassword());
@@ -48,16 +50,25 @@ public class LoginController {
         User existingUser = userServiceImpl.authenticateUser(userDto.getPhone());
         SmsRequest smsRequest1=new SmsRequest();
         smsRequest1.setPhone(userDto.getPhone());
+//        String s=phone;
+//        if (s==null)
+//        {
+//            return new ResponseEntity<>("Phone Not found",HttpStatus.OK);
+//        }
         plivoController.sendSms(smsRequest1);
+        OtpResponse otpStatus=new OtpResponse();
+        otpStatus.setOtpStatus(OtpStatus.SUCCESS);
+        otpStatus.setMessage("otp send successfully");
 
-        if (existingUser == null) {
+//        if (existingUser == null) {
+
             // Authentication failed, return an error response
-            return new ResponseEntity<>("NEW USER->OTP send Successfully", HttpStatus.OK);
-        } else {
+            return new ResponseEntity<>(otpStatus, HttpStatus.OK);
+//        } else {
             // Authentication succeeded, return a success response
-            String token=tokenManager.generateToken(existingUser.getId());
-            return new ResponseEntity<>("OLD USER->OTP send Successfully"+token, HttpStatus.OK);
-        }
+//            String token=tokenManager.generateToken(existingUser.getId());
+//            return new ResponseEntity<>(otpStatus, HttpStatus.OK);
+//        }
     }
 
     @PostMapping("/signup")

@@ -20,16 +20,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String name;
-    @Column(nullable = false, unique = true)
+//    @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false, unique = true)
     private String phone;
-    @Column(nullable = false)
-    private String password;
-    @Column
-    private boolean isPasswordLess;
+//    @Column(nullable = false)
+//    private String password;
+//    @Column
+//    private boolean isPasswordLess;
+    private Parent_Role parentRole;
+    private String date;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
@@ -38,10 +40,10 @@ public class User {
     )
     private List<Role> roles = new ArrayList<>();
 
-    public User(String name, String email, String password, List<Role> roles) {
+    public User(String name, String email, List<Role> roles) {
         this.name = name;
         this.email = email;
-        this.password = password;
+//        this.password = password;
         this.roles = roles;
     }
 }
