@@ -14,7 +14,7 @@ import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @CrossOrigin
-@RestController
+@RestController("/onboarding")
 public class OnBoardingController {
     @Autowired
     private OnBoardingService onBoardingService;
@@ -28,7 +28,6 @@ public class OnBoardingController {
         {
             throw new IllegalArgumentException();
         }
-
     }
     @PostMapping("/pregnanttrue")
     public ResponseEntity<PregnantTrueResponseDto> PregnantTrue(@RequestHeader("Authorization") String header, @RequestBody PregnantTrueRequestDto pregnantTrueRequestDto) throws Exception {

@@ -1,5 +1,6 @@
 package com.example.LoginPage.Models;
 
+import com.example.LoginPage.OnBoarding.LastState;
 import com.example.LoginPage.OnBoarding.PregnantChildEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,7 @@ public class User {
     private String dueDate;
     private boolean isFirstPregnancy;
     private boolean haveKids;
+    private LastState lastState;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
