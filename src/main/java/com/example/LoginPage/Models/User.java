@@ -36,7 +36,7 @@ public class User {
     private String date;
     private PregnantChildEnum pregnantorchild;
     private String dueDate;
-    private boolean isFirstPregnancy;
+    private boolean firstPregnancy;
     private boolean haveKids;
     private LastState lastState;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

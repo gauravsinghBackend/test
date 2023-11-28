@@ -6,6 +6,7 @@ import com.example.LoginPage.Models.ParentRole;
 import com.example.LoginPage.Models.Role;
 import com.example.LoginPage.Models.TbConstants;
 import com.example.LoginPage.Models.User;
+import com.example.LoginPage.OnBoarding.LastState;
 import com.example.LoginPage.Repository.RoleRepository;
 import com.example.LoginPage.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ public class UserServiceImpl {
 //        user.setPassword(userDto.getPassword());
 //        user1.setRoles(Arrays.asList(role));
         user1.setParentrole(ParentRole.fromString(signupDto.getParentrole()));
+        user1.setLastState(LastState.SIGNUP);
         userRepository.save(user1);
     }
 //    public User authenticateUser(String email, String password) {

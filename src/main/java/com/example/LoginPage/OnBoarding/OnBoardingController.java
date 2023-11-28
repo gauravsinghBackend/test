@@ -29,10 +29,10 @@ public class OnBoardingController {
             throw new IllegalArgumentException();
         }
     }
-    @PostMapping("/pregnanttrue")
+    @PostMapping("/duedate")
     public ResponseEntity<PregnantTrueResponseDto> PregnantTrue(@RequestHeader("Authorization") String header, @RequestBody PregnantTrueRequestDto pregnantTrueRequestDto) throws Exception {
         try{
-            return onBoardingService.PregnantTrue(header,pregnantTrueRequestDto);
+            return onBoardingService.DueDate(header,pregnantTrueRequestDto);
         }
         catch(Exception e)
         {

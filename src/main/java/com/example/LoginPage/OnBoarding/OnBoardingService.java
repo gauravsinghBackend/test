@@ -25,11 +25,13 @@ public class OnBoardingService {
         }
         User updateUser=user.get();
             updateUser.setPregnantorchild(PregnantChildEnum.fromPregnantChild(pregnantChildRequestDto.isWeArePregnant()));
+            //User SignedUp and set to Pregorchild aas 1;
+            updateUser.setLastState(LastState.PREGORCHILD);
             userRepository.save(updateUser);
             pregnantChildResponseDto.setMessage("parentorchild updated successfully");
             return new ResponseEntity<>(pregnantChildResponseDto,HttpStatus.OK);
     }
-    public ResponseEntity<PregnantTrueResponseDto> PregnantTrue(String header, PregnantTrueRequestDto pregnantTrueRequestDto) throws Exception {
+    public ResponseEntity<PregnantTrueResponseDto> DueDate(String header, PregnantTrueRequestDto pregnantTrueRequestDto) throws Exception {
         Optional<User> user=retrieveUserid(header);
         PregnantTrueResponseDto pregnantChildResponseDto=new PregnantTrueResponseDto();
         if (user.isEmpty()){
@@ -37,7 +39,8 @@ public class OnBoardingService {
             return new ResponseEntity<>(pregnantChildResponseDto, HttpStatus.OK);
         }
         User updateUser=user.get();
-        updateUser.setDueDate(pregnantTrueRequestDto.getDueDate());
+        updateUser.setDueDate(pregnantTrueRequestDto.getDuedate());
+        updateUser.setLastState(LastState.DUEDATE);
         userRepository.save(updateUser);
         pregnantChildResponseDto.setMessage("PregnantTrue updated successfully");
         return new ResponseEntity<>(pregnantChildResponseDto,HttpStatus.OK);
@@ -50,9 +53,10 @@ public class OnBoardingService {
             return new ResponseEntity<>(firstPregnancyResponseDto, HttpStatus.OK);
         }
         User updateUser=user.get();
-        updateUser.setFirstPregnancy(firstPregnancyRequestDto.isFirstPregnancy());
+        updateUser.setFirstPregnancy(firstPregnancyRequestDto.isFirstpregnancy());
+        updateUser.setLastState(LastState.FIRSTPREGNANCY);
         userRepository.save(updateUser);
-        firstPregnancyResponseDto.setMessage("FirstPregnancy or not updated successfully");
+        firstPregnancyResponseDto.setMessage("FirstPregnancy updated successfully");
         return new ResponseEntity<>(firstPregnancyResponseDto,HttpStatus.OK);
     }
     public ResponseEntity<HaveKidsResponseDto> HaveKids(String header, HaveKidsRequestDto haveKidsRequestDto) throws Exception {
@@ -64,6 +68,7 @@ public class OnBoardingService {
         }
         User updateUser=user.get();
         updateUser.setHaveKids(haveKidsRequestDto.isHaveKids());
+        updateUser.setLastState(LastState.HAVEKIDS);
         userRepository.save(updateUser);
         haveKidsResponseDto.setMessage("HaveKids updated successfully");
         return new ResponseEntity<>(haveKidsResponseDto,HttpStatus.OK);
@@ -87,6 +92,5 @@ public class OnBoardingService {
         //return the extracted data from Database
         return user;
     }
-
-
 }
+

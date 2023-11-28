@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class FirstPregnancyRequestDto {
-    private boolean firstPregnancy;
+    private boolean firstpregnancy;
 }
 // isFirstPregnancy: boolean

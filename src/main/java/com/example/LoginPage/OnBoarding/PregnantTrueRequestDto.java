@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PregnantTrueRequestDto {
-    private String dueDate;
+    private String duedate;
 }
 
 //        dueDate: string
