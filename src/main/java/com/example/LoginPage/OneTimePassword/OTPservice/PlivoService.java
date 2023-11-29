@@ -1,4 +1,5 @@
 package com.example.LoginPage.OneTimePassword.OTPservice;
+import com.example.LoginPage.Encryption.TokenManager;
 import com.example.LoginPage.OneTimePassword.OTPmodel.OTP;
 import com.example.LoginPage.OneTimePassword.OtpRepository.OtpRepository;
 import com.twilio.Twilio;
@@ -17,6 +18,8 @@ import java.util.Random;
 
 @Service
 public class PlivoService {
+    @Autowired
+    private TokenManager tokenManager;
     @Autowired
     private OtpRepository otpRepository;
     @Value("${twilio.AccountSid}")
@@ -41,7 +44,8 @@ public class PlivoService {
 //            Plivo.init("MAYZHJOTLHODQXMZM3NM","ZjYxZTE3MTc5NzZkMmE4MmU4OGQ0NGRiODkwZjhj");
             otp=generateOtp();
             OTP obj =new OTP();
-            obj.setOtp(otp);
+//            obj.setOtp(otp);
+            obj.setOtp(tokenManager.generateToken(Long.parseLong(otp)));
             obj.setExpiryTime(LocalDateTime.now());
             obj.setPhone(to);
             otpRepository.save(obj);
@@ -59,10 +63,11 @@ public class PlivoService {
         int otp = 1_000 + random.nextInt(9_000);
         return String.valueOf(otp);
     }
-    public  boolean ValidateOtpService(String phone, String otp){
+    public  boolean ValidateOtpService(String phone, String otp) throws Exception {
         //OTP if single time user inserts OTP;
         Optional<OTP> fetchedOtp = otpRepository.findByPhone(phone);
         OTP retrievedOtp= fetchedOtp.get();
+        String s=tokenManager.generateToken(Long.parseLong(otp));
         LocalDateTime currentTime = LocalDateTime.now();
         /*
         Validations: 1. Check if fetchedOtp is null or invalid number is passed
@@ -70,7 +75,7 @@ public class PlivoService {
                      3. Check if OTP is expired or not;
                      4. Latest OTP only be checked remaining will be invalid/Resend OTP as latest OTP
         */
-        if (retrievedOtp.getPhone()!=null && retrievedOtp.getOtp().equals(otp) && ChronoUnit.MINUTES.between(retrievedOtp.getExpiryTime(), currentTime)<=5) {
+        if (retrievedOtp.getPhone()!=null && retrievedOtp.getOtp().equals(s) && ChronoUnit.MINUTES.between(retrievedOtp.getExpiryTime(), currentTime)<=5) {
             return true;
         }
         return false;
