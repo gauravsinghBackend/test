@@ -1,8 +1,7 @@
-package com.zevo360.filestorageservice.entity;
+package com.example.LoginPage.filestorageservice.entity;
 
-import com.zevo360.filestorageservice.controller.Status;
+import com.example.LoginPage.filestorageservice.controller.Status;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,8 +1,8 @@
-package com.Contact_US.Contact.Controller;
+package com.example.LoginPage.ContactUs.Controller;
 
-import com.Contact_US.Contact.Dto.ContactDto;
-import com.Contact_US.Contact.Entity.ContactEntity;
-import com.Contact_US.Contact.ServiceImpl.ContactServiceImpl;
+import com.example.LoginPage.ContactUs.Dto.ContactDto;
+import com.example.LoginPage.ContactUs.Entity.ContactEntity;
+import com.example.LoginPage.ContactUs.ServiceImpl.ContactServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

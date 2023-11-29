@@ -1,17 +1,16 @@
-package com.zevo360.filestorageservice.serviceImpl;
+package com.example.LoginPage.filestorageservice.serviceImpl;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
-import com.zevo360.filestorageservice.controller.Status;
-import com.zevo360.filestorageservice.dto.ReelsDto;
-import com.zevo360.filestorageservice.entity.Reels;
-import com.zevo360.filestorageservice.entity.User;
-import com.zevo360.filestorageservice.exception.FileUploadingFailedException;
-import com.zevo360.filestorageservice.repository.ReelsRepository;
-import com.zevo360.filestorageservice.repository.UserRepository;
-import com.zevo360.filestorageservice.service.ReelsService;
+import com.example.LoginPage.LoginSignUp.UserRepository;
+import com.example.LoginPage.Models.User;
+import com.example.LoginPage.filestorageservice.controller.Status;
+import com.example.LoginPage.filestorageservice.entity.Reels;
+import com.example.LoginPage.filestorageservice.exception.FileUploadingFailedException;
+import com.example.LoginPage.filestorageservice.repository.ReelsRepository;
+import com.example.LoginPage.filestorageservice.service.ReelsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -37,7 +36,7 @@ public class ReelsServiceImpl implements ReelsService {
     @Value("${application.bucket.name}")
     private String bucketName;
 
-    private Reels uploadFile(MultipartFile file,String category, Long userId,String name, String tag, Status status, String caption, Integer ageCategory) {
+    private Reels uploadFile(MultipartFile file, String category, Long userId, String name, String tag, Status status, String caption, Integer ageCategory) {
         User user = userRepository.getUsersById(userId);
         if(user == null){
             throw new RuntimeException("Invalid user id");

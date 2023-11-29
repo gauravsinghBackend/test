@@ -1,4 +1,4 @@
-package com.zevo360.filestorageservice.exception;
+package com.example.LoginPage.filestorageservice.exception;
 
 public class InvalidRequestException extends RuntimeException{
     public InvalidRequestException(String message){

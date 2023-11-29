@@ -1,6 +1,5 @@
-package com.example.LoginPage.DTO;
+package com.example.LoginPage.LoginSignUp.DTO;
 
-import com.example.LoginPage.Models.ParentRole;
 import lombok.Data;
 
 @Data

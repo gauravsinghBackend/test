@@ -1,4 +1,4 @@
-package com.zevo360.filestorageservice.entity;
+package com.example.LoginPage.filestorageservice.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity

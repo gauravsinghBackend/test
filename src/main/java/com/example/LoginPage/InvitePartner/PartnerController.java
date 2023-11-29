@@ -1,8 +1,8 @@
 package com.example.LoginPage.InvitePartner;
 
-//import com.example.LoginPage.Repository.TokenRepository;
-import com.example.LoginPage.Repository.TokenRepository;
-import com.example.LoginPage.Repository.UserRepository;
+//import com.example.LoginPage.LoginSignUp.TokenRepository;
+import com.example.LoginPage.LoginSignUp.TokenRepository;
+import com.example.LoginPage.LoginSignUp.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

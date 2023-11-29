@@ -1,6 +1,6 @@
-package com.zevo360.filestorageservice.repository;
+package com.example.LoginPage.filestorageservice.repository;
 
-import com.zevo360.filestorageservice.entity.S3Storage;
+import com.example.LoginPage.filestorageservice.entity.S3Storage;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

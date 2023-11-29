@@ -1,4 +1,4 @@
-package com.zevo360.filestorageservice.exception;
+package com.example.LoginPage.filestorageservice.exception;
 
 public class FileUploadingFailedException extends RuntimeException{
     public FileUploadingFailedException(String message){

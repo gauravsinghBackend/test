@@ -1,4 +1,4 @@
-package com.zevo360.filestorageservice.config;
+package com.example.LoginPage.filestorageservice.config;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

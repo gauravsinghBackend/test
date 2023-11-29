@@ -1,4 +1,4 @@
-package com.example.LoginPage.Repository;
+package com.example.LoginPage.LoginSignUp;
 
 import com.example.LoginPage.Models.UserAuthentificationToken;
 import org.springframework.data.jpa.repository.JpaRepository;

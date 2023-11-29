@@ -1,20 +1,18 @@
-package com.zevo360.filestorageservice.serviceImpl;
+package com.example.LoginPage.filestorageservice.serviceImpl;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
 import com.amazonaws.util.IOUtils;
-import com.zevo360.filestorageservice.dto.PhotoVaultResponseDto;
-import com.zevo360.filestorageservice.entity.S3Storage;
-import com.zevo360.filestorageservice.entity.User;
-import com.zevo360.filestorageservice.exception.FileUploadingFailedException;
-
-import com.zevo360.filestorageservice.repository.S3StorageRepository;
-import com.zevo360.filestorageservice.repository.UserRepository;
-import com.zevo360.filestorageservice.service.StorageService;
+import com.example.LoginPage.LoginSignUp.UserRepository;
+import com.example.LoginPage.Models.User;
+import com.example.LoginPage.filestorageservice.dto.PhotoVaultResponseDto;
+import com.example.LoginPage.filestorageservice.entity.S3Storage;
+import com.example.LoginPage.filestorageservice.exception.FileUploadingFailedException;
+import com.example.LoginPage.filestorageservice.repository.S3StorageRepository;
+import com.example.LoginPage.filestorageservice.service.StorageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -158,7 +156,8 @@ public class StorageServiceImpl implements StorageService {
     @Override
     public List<PhotoVaultResponseDto> getPaginatedPhotoUrls(int page, int limit, Long userId) {
 
-        List<S3Storage> s3StorageList = s3StorageRepository.findNRecordsPerGroupPaged(page,limit,userId);
+        List<S3Storage> s3StorageList = s3StorageRepository.findNRecordsPerGroupPaged
+                (page,limit,userId);
         return getS3Storages(s3StorageList);
     }
 

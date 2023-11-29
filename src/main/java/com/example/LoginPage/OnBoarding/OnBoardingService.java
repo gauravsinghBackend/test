@@ -3,7 +3,7 @@ package com.example.LoginPage.OnBoarding;
 import com.example.LoginPage.Encryption.TokenData;
 import com.example.LoginPage.Encryption.TokenManager;
 import com.example.LoginPage.Models.User;
-import com.example.LoginPage.Repository.UserRepository;
+import com.example.LoginPage.LoginSignUp.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

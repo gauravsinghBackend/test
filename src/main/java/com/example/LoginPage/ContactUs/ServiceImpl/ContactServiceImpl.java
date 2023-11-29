@@ -1,10 +1,10 @@
-package com.Contact_US.Contact.ServiceImpl;
+package com.example.LoginPage.ContactUs.ServiceImpl;
 
-import com.Contact_US.Contact.Dto.ContactDto;
-import com.Contact_US.Contact.Entity.ContactEntity;
-import com.Contact_US.Contact.Respository.ContactRepository;
-//import com.Contact_US.Contact.Service.ContactService;
-import com.Contact_US.Contact.Service.ContactService;
+
+import com.example.LoginPage.ContactUs.Dto.ContactDto;
+import com.example.LoginPage.ContactUs.Entity.ContactEntity;
+import com.example.LoginPage.ContactUs.Respository.ContactRepository;
+import com.example.LoginPage.ContactUs.Service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

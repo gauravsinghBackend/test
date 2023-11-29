@@ -1,4 +1,4 @@
-package com.Contact_US.Contact.Entity;
+package com.example.LoginPage.ContactUs.Entity;
 
 
 import jakarta.persistence.*;

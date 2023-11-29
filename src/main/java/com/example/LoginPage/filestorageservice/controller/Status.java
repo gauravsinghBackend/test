@@ -1,4 +1,4 @@
-package com.zevo360.filestorageservice.controller;
+package com.example.LoginPage.filestorageservice.controller;
 
 public enum Status {
         ACTIVE,INACTIVE

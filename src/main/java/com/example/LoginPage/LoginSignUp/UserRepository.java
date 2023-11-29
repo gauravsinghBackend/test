@@ -1,4 +1,4 @@
-package com.example.LoginPage.Repository;
+package com.example.LoginPage.LoginSignUp;
 
 
 import com.example.LoginPage.Models.User;
@@ -13,4 +13,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 //    User findByEmail(String email);
     User findByPhone(String phone);
 
+    User getUsersById(Long userId);
 }

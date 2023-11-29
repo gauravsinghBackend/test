@@ -1,7 +1,9 @@
-package com.zevo360.filestorageservice.encryption;
+package com.example.LoginPage.filestorageservice.encryption;
 
-import com.zevo360.filestorageservice.entity.User;
-import com.zevo360.filestorageservice.repository.UserRepository;
+import com.example.LoginPage.Encryption.TokenData;
+import com.example.LoginPage.Encryption.TokenManager;
+import com.example.LoginPage.LoginSignUp.UserRepository;
+import com.example.LoginPage.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

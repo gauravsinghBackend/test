@@ -1,8 +1,6 @@
-package com.example.LoginPage.DTO;
+package com.example.LoginPage.LoginSignUp.DTO;
 
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

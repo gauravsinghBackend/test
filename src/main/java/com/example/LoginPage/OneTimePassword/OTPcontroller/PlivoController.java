@@ -1,18 +1,12 @@
 package com.example.LoginPage.OneTimePassword.OTPcontroller;
-import com.example.LoginPage.OneTimePassword.DTO.OtpValidation;
 import com.example.LoginPage.OneTimePassword.DTO.SmsRequest;
-import com.example.LoginPage.OneTimePassword.OTPmodel.OTP;
 import com.example.LoginPage.OneTimePassword.OTPservice.PlivoService;
 import com.example.LoginPage.Models.User;
-import com.example.LoginPage.OneTimePassword.OtpRepository.OtpRepository;
-import com.example.LoginPage.Repository.UserRepository;
+import com.example.LoginPage.LoginSignUp.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @Controller
 public class PlivoController {

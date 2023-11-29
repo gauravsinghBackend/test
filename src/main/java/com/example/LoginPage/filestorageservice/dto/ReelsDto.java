@@ -1,15 +1,10 @@
-package com.zevo360.filestorageservice.dto;
+package com.example.LoginPage.filestorageservice.dto;
 
-import com.zevo360.filestorageservice.controller.Status;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import com.example.LoginPage.filestorageservice.controller.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

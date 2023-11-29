@@ -3,10 +3,11 @@ package com.example.LoginPage.InvitePartner;
 import com.example.LoginPage.Encryption.TokenData;
 import com.example.LoginPage.Encryption.TokenManager;
 import com.example.LoginPage.Models.User;
-import com.example.LoginPage.Repository.PartnerRepository;
-import com.example.LoginPage.Repository.TokenRepository;
-import com.example.LoginPage.Repository.UserRepository;
+import com.example.LoginPage.LoginSignUp.TokenRepository;
+import com.example.LoginPage.LoginSignUp.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,12 +16,12 @@ import java.util.Optional;
 public class PartnerService {
     private final TokenRepository tokenRepository;
     private final UserRepository userRepository;
-    private final PartnerRepository partnerRepository;
+    private final InvitePartnerRepositories partnerRepository;
 
     private TokenManager tokenManager;
     @Autowired
     public PartnerService(TokenRepository tokenRepository, UserRepository userRepository,
-                          PartnerRepository partnerRepository,TokenManager tokenManager) {
+                          InvitePartnerRepositories partnerRepository,TokenManager tokenManager) {
         this.tokenRepository = tokenRepository;
         this.userRepository = userRepository;
         this.partnerRepository = partnerRepository;

@@ -1,4 +1,4 @@
-package com.example.LoginPage.DTO;
+package com.example.LoginPage.LoginSignUp.DTO;
 
 import lombok.Data;
 

@@ -1,0 +1,20 @@
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIAVBQDCNXMSSZRA6XO
+      secret-key: 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
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+
+application.bucket.name: zevo360-file-upload
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2MB
+      max-file-size: 500MB  # Set the maximum file size as needed
+      max-request-size: 1024MB

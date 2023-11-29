@@ -1,9 +1,9 @@
-package com.zevo360.filestorageservice.controller;
+package com.example.LoginPage.filestorageservice.controller;
 
-import com.zevo360.filestorageservice.encryption.RetrieveUseId;
-import com.zevo360.filestorageservice.entity.Reels;
-import com.zevo360.filestorageservice.entity.User;
-import com.zevo360.filestorageservice.service.ReelsService;
+import com.example.LoginPage.Models.User;
+import com.example.LoginPage.filestorageservice.encryption.RetrieveUseId;
+import com.example.LoginPage.filestorageservice.entity.Reels;
+import com.example.LoginPage.filestorageservice.service.ReelsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +25,8 @@ public class ReelsController {
     private RetrieveUseId retrieveUseId;
 
     @PostMapping("/upload")
-    public ResponseEntity<List<Reels>> uploadFile(@RequestBody String category, @RequestBody List<MultipartFile> files,@RequestHeader("Authorization") String header,
-                                                  @RequestBody String name,@RequestBody String tag,@RequestBody Status status,@RequestBody String caption,@RequestBody Integer ageCategory){
+    public ResponseEntity<List<Reels>> uploadFile(@RequestBody String category, @RequestBody List<MultipartFile> files, @RequestHeader("Authorization") String header,
+                                                  @RequestBody String name, @RequestBody String tag, @RequestBody Status status, @RequestBody String caption, @RequestBody Integer ageCategory){
         Long userId = null;
         try {
             Optional<User> user = retrieveUseId.retrieveUserid(header);

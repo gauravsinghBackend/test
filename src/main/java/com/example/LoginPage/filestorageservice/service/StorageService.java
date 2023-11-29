@@ -1,13 +1,12 @@
-package com.zevo360.filestorageservice.service;
+package com.example.LoginPage.filestorageservice.service;
 
 import com.amazonaws.services.s3.model.S3ObjectSummary;
-import com.zevo360.filestorageservice.dto.PhotoVaultResponseDto;
-import com.zevo360.filestorageservice.entity.S3Storage;
+import com.example.LoginPage.filestorageservice.dto.PhotoVaultResponseDto;
+import com.example.LoginPage.filestorageservice.entity.S3Storage;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 public interface StorageService {
 

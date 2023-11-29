@@ -1,28 +1,18 @@
-package com.example.LoginPage.Controller;
+package com.example.LoginPage.LoginSignUp;
 
-import com.example.LoginPage.DTO.ForgetPasswordDto;
-import com.example.LoginPage.DTO.SignUpResponseDto;
-import com.example.LoginPage.DTO.SignupDto;
-import com.example.LoginPage.DTO.UserDto;
+import com.example.LoginPage.LoginSignUp.DTO.SignUpResponseDto;
+import com.example.LoginPage.LoginSignUp.DTO.SignupDto;
+import com.example.LoginPage.LoginSignUp.DTO.UserDto;
 import com.example.LoginPage.Encryption.TokenData;
 import com.example.LoginPage.Encryption.TokenManager;
-import com.example.LoginPage.InvitePartner.InvitePartnerResponseDto;
 import com.example.LoginPage.Models.User;
 import com.example.LoginPage.OneTimePassword.DTO.OtpResponse;
 import com.example.LoginPage.OneTimePassword.DTO.OtpStatus;
 import com.example.LoginPage.OneTimePassword.DTO.SmsRequest;
 import com.example.LoginPage.OneTimePassword.OTPcontroller.PlivoController;
-import com.example.LoginPage.Repository.UserRepository;
-import com.example.LoginPage.Service.UserService;
-import com.example.LoginPage.Service.UserServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;

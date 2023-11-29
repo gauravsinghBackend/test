@@ -1,20 +1,18 @@
-package com.zevo360.filestorageservice.controller;
-
+package com.example.LoginPage.filestorageservice.controller;
 
 
 import com.amazonaws.services.s3.model.S3ObjectSummary;
-import com.zevo360.filestorageservice.dto.PhotoVaultResponseDto;
-import com.zevo360.filestorageservice.encryption.RetrieveUseId;
-import com.zevo360.filestorageservice.entity.S3Storage;
-import com.zevo360.filestorageservice.entity.User;
-import com.zevo360.filestorageservice.service.StorageService;
+import com.example.LoginPage.Models.User;
+import com.example.LoginPage.filestorageservice.dto.PhotoVaultResponseDto;
+import com.example.LoginPage.filestorageservice.encryption.RetrieveUseId;
+import com.example.LoginPage.filestorageservice.entity.S3Storage;
+import com.example.LoginPage.filestorageservice.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import java.time.LocalDate;
 import java.util.List;
@@ -68,7 +66,7 @@ public class StorageController {
     }
 
     @GetMapping("/getS3StoragesByCategory")
-    public ResponseEntity<List<PhotoVaultResponseDto>> getS3StorageByCategory(@RequestParam String category, @RequestParam Integer limit,@RequestHeader ("Authorization") String header){
+    public ResponseEntity<List<PhotoVaultResponseDto>> getS3StorageByCategory(@RequestParam String category, @RequestParam Integer limit, @RequestHeader ("Authorization") String header){
         Long userId = null;
         try {
             Optional<User> user = retrieveUseId.retrieveUserid(header);
@@ -80,7 +78,7 @@ public class StorageController {
     }
 
     @GetMapping("/pagination/getS3ByUploadeDate")
-    public ResponseEntity<List<S3Storage>> getS3ByUploadeDate(@RequestParam(defaultValue = "1") int pageNumber, @RequestParam(defaultValue = "2") int limit, @RequestParam LocalDate uploadDate,@RequestHeader ("Authorization") String header){
+    public ResponseEntity<List<S3Storage>> getS3ByUploadeDate(@RequestParam(defaultValue = "1") int pageNumber, @RequestParam(defaultValue = "2") int limit, @RequestParam LocalDate uploadDate, @RequestHeader ("Authorization") String header){
         Long userId = null;
         try {
             Optional<User> user = retrieveUseId.retrieveUserid(header);

@@ -1,12 +1,10 @@
-package com.example.LoginPage.Service;
+package com.example.LoginPage.LoginSignUp;
 
 
 
-import com.example.LoginPage.DTO.UserDto;
 import com.example.LoginPage.Models.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 @Repository
 public interface UserService {

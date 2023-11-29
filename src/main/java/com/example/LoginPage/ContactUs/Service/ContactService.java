@@ -1,8 +1,8 @@
-package com.Contact_US.Contact.Service;
+package com.example.LoginPage.ContactUs.Service;
 
-import com.Contact_US.Contact.Dao.ContactDao;
-import com.Contact_US.Contact.Dto.ContactDto;
-import com.Contact_US.Contact.Entity.ContactEntity;
+
+import com.example.LoginPage.ContactUs.Dto.ContactDto;
+import com.example.LoginPage.ContactUs.Entity.ContactEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

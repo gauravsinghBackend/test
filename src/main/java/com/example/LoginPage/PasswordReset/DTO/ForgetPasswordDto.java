@@ -1,4 +1,4 @@
-package com.example.LoginPage.DTO;
+package com.example.LoginPage.PasswordReset.DTO;
 
 import lombok.Data;
 import lombok.Getter;

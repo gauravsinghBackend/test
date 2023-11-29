@@ -1,18 +1,15 @@
-package com.example.LoginPage.Service;
+package com.example.LoginPage.LoginSignUp;
 
 
-import com.example.LoginPage.DTO.SignupDto;
+import com.example.LoginPage.LoginSignUp.DTO.SignupDto;
 import com.example.LoginPage.Models.ParentRole;
-import com.example.LoginPage.Models.Role;
-import com.example.LoginPage.Models.TbConstants;
 import com.example.LoginPage.Models.User;
 import com.example.LoginPage.OnBoarding.LastState;
-import com.example.LoginPage.Repository.RoleRepository;
-import com.example.LoginPage.Repository.UserRepository;
+import com.example.LoginPage.LoginSignUp.RoleRepository;
+import com.example.LoginPage.LoginSignUp.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 @Service

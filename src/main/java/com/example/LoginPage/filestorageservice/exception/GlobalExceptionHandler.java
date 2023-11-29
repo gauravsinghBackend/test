@@ -1,4 +1,4 @@
-package com.zevo360.filestorageservice.exception;
+package com.example.LoginPage.filestorageservice.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

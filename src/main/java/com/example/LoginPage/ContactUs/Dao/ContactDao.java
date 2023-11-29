@@ -1,4 +1,4 @@
-package com.Contact_US.Contact.Dao;
+package com.example.LoginPage.ContactUs.Dao;
 
 public class ContactDao {
 }

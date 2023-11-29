@@ -1,13 +1,11 @@
 package com.example.LoginPage.OneTimePassword.OTPcontroller;
 
-import com.example.LoginPage.Encryption.TokenData;
 import com.example.LoginPage.Encryption.TokenManager;
 import com.example.LoginPage.Models.User;
 import com.example.LoginPage.OneTimePassword.DTO.OtpValidation;
 import com.example.LoginPage.OneTimePassword.OTPservice.PlivoService;
-import com.example.LoginPage.Repository.UserRepository;
+import com.example.LoginPage.LoginSignUp.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;

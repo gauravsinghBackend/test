@@ -1,4 +1,4 @@
-package com.Contact_US.Contact.Dto;
+package com.example.LoginPage.ContactUs.Dto;
 
 import lombok.Data;
 
