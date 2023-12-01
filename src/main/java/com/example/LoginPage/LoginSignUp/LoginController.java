@@ -1,6 +1,7 @@
 package com.example.LoginPage.LoginSignUp;
 
 import com.example.LoginPage.LoginSignUp.DTO.SignUpResponseDto;
+import com.example.LoginPage.LoginSignUp.DTO.SignUpUpdate;
 import com.example.LoginPage.LoginSignUp.DTO.SignupDto;
 import com.example.LoginPage.LoginSignUp.DTO.UserDto;
 import com.example.LoginPage.Encryption.TokenData;
@@ -40,23 +41,32 @@ public class LoginController {
 //        User existingUser = userServiceImpl.authenticateUser(userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()));
 //        User existingUser = userServiceImpl.authenticateUser(userDto.getEmail(), userDto.getPassword());
         //NEW LOGIC for OTP sending
-        User existingUser = userServiceImpl.authenticateUser(userDto.getPhone());
-        SmsRequest smsRequest1=new SmsRequest();
-        smsRequest1.setPhone(userDto.getPhone());
+        OtpResponse otpStatus = new OtpResponse();
+        try {
+            User existingUser = userServiceImpl.authenticateUser(userDto.getPhone());
+            SmsRequest smsRequest1 = new SmsRequest();
+            smsRequest1.setPhone(userDto.getPhone());
 //        String s=phone;
 //        if (s==null)
 //        {
 //            return new ResponseEntity<>("Phone Not found",HttpStatus.OK);
 //        }
-        plivoController.sendSms(smsRequest1);
-        OtpResponse otpStatus=new OtpResponse();
-        otpStatus.setOtpStatus(OtpStatus.SUCCESS);
-        otpStatus.setMessage("otp send successfully");
+            plivoController.sendSms(smsRequest1);
+
+            otpStatus.setOtpStatus(OtpStatus.SUCCESS);
+            otpStatus.setMessage("otp send successfully");
 
 //        if (existingUser == null) {
 
             // Authentication failed, return an error response
             return new ResponseEntity<>(otpStatus, HttpStatus.OK);
+        }
+        catch (Exception e) {
+            // If an exception occurs, handle it and return an error response
+            otpStatus.setMessage("Failed to Send OTP");
+            otpStatus.setOtpStatus(OtpStatus.FAILED);
+            return new ResponseEntity<>(otpStatus,HttpStatus.OK);
+        }
 //        } else {
             // Authentication succeeded, return a success response
 //            String token=tokenManager.generateToken(existingUser.getId());
@@ -69,39 +79,47 @@ public class LoginController {
         //Check The user from Header String
         //Extra method in token Manager needs to be made to Do these tasks
         SignUpResponseDto signUpResponseDto=new SignUpResponseDto();
-        if (header==null) {
-            signUpResponseDto.setMeassage("Header Missing");
-            return new ResponseEntity<>(signUpResponseDto,HttpStatus.OK);
-        }
-        String token = header.substring(7);
-        TokenData tokenData = tokenManager.decryptToken(token);
-        if (tokenData==null)
-        {
-            signUpResponseDto.setMeassage("Incorrect Header");
-            return new ResponseEntity<>(signUpResponseDto,HttpStatus.OK);
-        }
-        Optional<User> user = userRepository.findById(tokenData.getUserId());
-        //validate if user is null
-        if (user.isEmpty()) {
-            signUpResponseDto.setMeassage("User is Invalid or Null");
-            return new ResponseEntity<>(signUpResponseDto,HttpStatus.OK);
-        }
+        try {
+            if (header == null) {
+                signUpResponseDto.setMeassage("Header Missing");
+                return new ResponseEntity<>(signUpResponseDto, HttpStatus.OK);
+            }
+            String token = header.substring(7);
+            TokenData tokenData = tokenManager.decryptToken(token);
+            if (tokenData == null) {
+                signUpResponseDto.setMeassage("Incorrect Header");
+                return new ResponseEntity<>(signUpResponseDto, HttpStatus.OK);
+            }
+            Optional<User> user = userRepository.findById(tokenData.getUserId());
+            //validate if user is null
+            if (user.isEmpty()) {
+                signUpResponseDto.setMeassage("User is Invalid or Null");
+                return new ResponseEntity<>(signUpResponseDto, HttpStatus.OK);
+            }
 
-        // Check if the user with the given email already exists in the database
+            // Check if the user with the given email already exists in the database
 //        Optional<User> existingUser = userRepository.findById(user.get().getId());
             // User does not exist, so save the new user to the database
-    //        User user = new User();
-    //        user.setName(signupDto.getName());
-    //        user.setEmail(signupDto.getEmail());
-    //        user.setPassword(signupDto.getPassword());
-    //        user.setPhone(signupDto.getPhone());
+            //        User user = new User();
+            //        user.setName(signupDto.getName());
+            //        user.setEmail(signupDto.getEmail());
+            //        user.setPassword(signupDto.getPassword());
+            //        user.setPhone(signupDto.getPhone());
             userServiceImpl.saveUser(user, signupDto);
             // Return a success response
-        signUpResponseDto.setMeassage("User signed in successfully");
-        return new ResponseEntity<>(signUpResponseDto,HttpStatus.OK);
+            signUpResponseDto.setMeassage("User signed in successfully");
+            signUpResponseDto.setSignUpUpdate(SignUpUpdate.SUCCESS);
+            return new ResponseEntity<>(signUpResponseDto, HttpStatus.OK);
+        }
+        catch (Exception e){
+            signUpResponseDto.setMeassage("user registration failed");
+            signUpResponseDto.setSignUpUpdate(SignUpUpdate.FAILED);
+            return new ResponseEntity<>(signUpResponseDto,HttpStatus.OK);
+        }
     }
     @GetMapping("/user")
     public ResponseEntity<String > getUser(){
+
         return new ResponseEntity<>("UserExists",HttpStatus.OK);
     }
 

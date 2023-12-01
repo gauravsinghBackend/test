@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class SignUpResponseDto {
     private String meassage;
-    private String status;
+    private SignUpUpdate signUpUpdate;
 }
