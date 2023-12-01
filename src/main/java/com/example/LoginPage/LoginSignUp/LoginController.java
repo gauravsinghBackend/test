@@ -119,6 +119,7 @@ public class LoginController {
     }
     @GetMapping("/user")
     public ResponseEntity<String > getUser(){
+
         return new ResponseEntity<>("UserExists",HttpStatus.OK);
     }
 
