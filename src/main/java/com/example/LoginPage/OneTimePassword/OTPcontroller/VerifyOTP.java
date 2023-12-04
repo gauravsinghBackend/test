@@ -2,6 +2,7 @@ package com.example.LoginPage.OneTimePassword.OTPcontroller;
 
 import com.example.LoginPage.Encryption.TokenManager;
 import com.example.LoginPage.Models.User;
+import com.example.LoginPage.OnBoarding.LastState;
 import com.example.LoginPage.OneTimePassword.DTO.OtpValidation;
 import com.example.LoginPage.OneTimePassword.FailedToLoginException;
 import com.example.LoginPage.OneTimePassword.OTPservice.PlivoService;
@@ -22,17 +23,25 @@ public class VerifyOTP {
     private UserRepository userRepository;
 
     @PostMapping("/verify")
-    public ResponseEntity<VerifyResponse> validateOtp(@RequestBody OtpValidation otpValidation) throws Exception {
+    public ResponseEntity<GlobalResponse> validateOtp(@RequestBody OtpValidation otpValidation) throws Exception {
 //        boolean otpEntityOptional = plivoService.ValidateOtpService(otpValidation.getPhone(),otpValidation.getOtp());
 //        boolean otpEntityOptional=true;
-        VerifyResponse verifyResponse=new VerifyResponse();
+        GlobalResponse.VerifyResponse verifyResponse=new GlobalResponse.VerifyResponse();
+        GlobalResponse globalResponse=new GlobalResponse();
         TokenManager tokenManager=new TokenManager();
         try {
             boolean otpEntityOptional = plivoService.ValidateOtpService(otpValidation.getPhone(),otpValidation.getOtp());
             if (otpEntityOptional) {
                 //Check if user Exists or not :
                 User user = userRepository.findByPhone(otpValidation.getPhone());
-                if (user != null) {
+                if (user.getLastState().equals(LastState.HAVEKIDS))
+                {
+                    verifyResponse.setAlreadyUser(false);
+                    verifyResponse.setOnboarded(true);
+                    String generatedToken = tokenManager.generateToken(user.getId());
+                    verifyResponse.setToken(generatedToken);
+                }
+                else if (user != null) {
                     //it will be true if user Exists in database:
                     // Case 1 : Onboarding Completed
                     // Case 2: Still OnBoarding
@@ -60,16 +69,23 @@ public class VerifyOTP {
 //            user.setEmail("gaurav@zevo360");
                 verifyResponse.setValidOtp(true);
                 verifyResponse.setUser(user);
-                return ResponseEntity.ok(verifyResponse);
+//                globalResponse.setMesaage("otp verified successfully");
+                globalResponse.setMeassage("otp verified successfully");
+                globalResponse.setStatus(VerifyOtpEnum.SUCCESS);
+                globalResponse.setVerifyResponse(verifyResponse);
+                return ResponseEntity.ok(globalResponse);
             } else {
                 verifyResponse.setValidOtp(false);
-                return ResponseEntity.ok(verifyResponse);
+                globalResponse.setMeassage("otp failed to verify");
+                globalResponse.setStatus(VerifyOtpEnum.FAILED);
+//                verifyResponse.setMesaage("otp failed to verify");
+                return ResponseEntity.ok(globalResponse);
             }
         } catch (FailedToLoginException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(verifyResponse);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(globalResponse);
         } catch (Exception e) {
             // Handle other exceptions
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(verifyResponse);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(globalResponse);
         }
     }
 }

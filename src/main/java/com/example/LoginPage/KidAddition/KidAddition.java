@@ -28,20 +28,20 @@ public class KidAddition {
             KidResponseDto kidResponseDto=new KidResponseDto();
             //Validate if Header is null
             if (header==null) {
-                kidResponseDto.setMeassage("Header Missing");
+                kidResponseDto.setMeassage("header missing");
                 return new ResponseEntity<>(kidResponseDto,HttpStatus.OK);
             }
             String token = header.substring(7);
             TokenData tokenData = tokenManager.decryptToken(token);
             if (tokenData==null)
             {
-                kidResponseDto.setMeassage("Incorrect Header");
+                kidResponseDto.setMeassage("incorrect header");
                 return new ResponseEntity<>(kidResponseDto,HttpStatus.OK);
             }
             Optional<User> user = userRepository.findById(tokenData.getUserId());
             //validate if user is null
             if (user.isEmpty()) {
-                kidResponseDto.setMeassage("User is Invalid or Null");
+                kidResponseDto.setMeassage("user is Invalid or null");
                 return new ResponseEntity<>(kidResponseDto,HttpStatus.OK);
             }
             Kid kid=kidService.addKid(user.get(), kidRequestDto.getName(), kidRequestDto.getDob(), kidRequestDto.getProfilePicture(),kidRequestDto.getGender());

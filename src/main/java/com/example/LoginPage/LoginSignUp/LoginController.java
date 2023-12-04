@@ -11,12 +11,15 @@ import com.example.LoginPage.OneTimePassword.DTO.OtpResponse;
 import com.example.LoginPage.OneTimePassword.DTO.OtpStatus;
 import com.example.LoginPage.OneTimePassword.DTO.SmsRequest;
 import com.example.LoginPage.OneTimePassword.OTPcontroller.PlivoController;
+import com.example.LoginPage.OneTimePassword.OTPservice.PlivoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @CrossOrigin
@@ -32,6 +35,7 @@ public class LoginController {
     private TokenManager tokenManager;
     @Autowired
     private PlivoController plivoController;
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 
     @PostMapping("/login")
@@ -53,18 +57,20 @@ public class LoginController {
 //        }
             plivoController.sendSms(smsRequest1);
 
-            otpStatus.setOtpStatus(OtpStatus.SUCCESS);
+            otpStatus.setStatus(OtpStatus.SUCCESS);
             otpStatus.setMessage("otp send successfully");
 
 //        if (existingUser == null) {
 
             // Authentication failed, return an error response
+            logger.error("otp send successfully at controller");
             return new ResponseEntity<>(otpStatus, HttpStatus.OK);
         }
         catch (Exception e) {
             // If an exception occurs, handle it and return an error response
-            otpStatus.setMessage("Failed to Send OTP");
-            otpStatus.setOtpStatus(OtpStatus.FAILED);
+            otpStatus.setMessage("failed to send otp");
+            logger.error("error sending otp at controller");
+            otpStatus.setStatus(OtpStatus.FAILED);
             return new ResponseEntity<>(otpStatus,HttpStatus.OK);
         }
 //        } else {
@@ -107,7 +113,7 @@ public class LoginController {
             //        user.setPhone(signupDto.getPhone());
             userServiceImpl.saveUser(user, signupDto);
             // Return a success response
-            signUpResponseDto.setMeassage("User signed in successfully");
+            signUpResponseDto.setMeassage("user signed in successfully");
             signUpResponseDto.setSignUpUpdate(SignUpUpdate.SUCCESS);
             return new ResponseEntity<>(signUpResponseDto, HttpStatus.OK);
         }
@@ -125,7 +131,7 @@ public class LoginController {
 
     @GetMapping("/test-controller")
     public ResponseEntity<String> testController(){
-        return new ResponseEntity<>("Test-Controller reached",HttpStatus.OK);
+        return new ResponseEntity<>("test-controller reached",HttpStatus.OK);
     }
 
 //    @PostMapping ("/forgot-password")

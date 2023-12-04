@@ -42,35 +42,35 @@ public class OnBoardingService {
         updateUser.setDueDate(pregnantTrueRequestDto.getDuedate());
         updateUser.setLastState(LastState.DUEDATE);
         userRepository.save(updateUser);
-        pregnantChildResponseDto.setMessage("PregnantTrue updated successfully");
+        pregnantChildResponseDto.setMessage("pregnantTrue updated successfully");
         return new ResponseEntity<>(pregnantChildResponseDto,HttpStatus.OK);
     }
     public ResponseEntity<FirstPregnancyResponseDto> FirstPregnancy(String header, FirstPregnancyRequestDto firstPregnancyRequestDto) throws Exception {
         Optional<User> user=retrieveUserid(header);
         FirstPregnancyResponseDto firstPregnancyResponseDto=new FirstPregnancyResponseDto();
         if (user.isEmpty()){
-            firstPregnancyResponseDto.setMessage("User not found");
+            firstPregnancyResponseDto.setMessage("user not found");
             return new ResponseEntity<>(firstPregnancyResponseDto, HttpStatus.OK);
         }
         User updateUser=user.get();
         updateUser.setFirstPregnancy(firstPregnancyRequestDto.isFirstpregnancy());
         updateUser.setLastState(LastState.FIRSTPREGNANCY);
         userRepository.save(updateUser);
-        firstPregnancyResponseDto.setMessage("FirstPregnancy updated successfully");
+        firstPregnancyResponseDto.setMessage("firstPregnancy updated successfully");
         return new ResponseEntity<>(firstPregnancyResponseDto,HttpStatus.OK);
     }
     public ResponseEntity<HaveKidsResponseDto> HaveKids(String header, HaveKidsRequestDto haveKidsRequestDto) throws Exception {
         Optional<User> user=retrieveUserid(header);
         HaveKidsResponseDto haveKidsResponseDto=new HaveKidsResponseDto();
         if (user.isEmpty()){
-            haveKidsResponseDto.setMessage("User not found");
+            haveKidsResponseDto.setMessage("user not found");
             return new ResponseEntity<>(haveKidsResponseDto, HttpStatus.OK);
         }
         User updateUser=user.get();
         updateUser.setHaveKids(haveKidsRequestDto.isHaveKids());
         updateUser.setLastState(LastState.HAVEKIDS);
         userRepository.save(updateUser);
-        haveKidsResponseDto.setMessage("HaveKids updated successfully");
+        haveKidsResponseDto.setMessage("haveKids updated successfully");
         return new ResponseEntity<>(haveKidsResponseDto,HttpStatus.OK);
     }
     public Optional<User> retrieveUserid(String header) throws Exception {

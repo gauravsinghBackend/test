@@ -34,7 +34,6 @@ public class ContactController {
     public ResponseEntity<String> PostContact(@RequestBody ContactDto contactDto){
         return contactService.postContact(contactDto);
     }
-
     @PostMapping("/contact-us/post")
     public ResponseEntity<PostContactEntity> PostLoginContact(@RequestBody PostContactDto postContactDto){
         return contactService.postLoginContactUs(postContactDto);

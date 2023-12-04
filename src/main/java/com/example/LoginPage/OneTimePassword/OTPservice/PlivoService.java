@@ -15,9 +15,12 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.Random;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class PlivoService {
+    private static final Logger logger = LoggerFactory.getLogger(PlivoService.class);
     @Autowired
     private TokenManager tokenManager;
     @Autowired
@@ -51,8 +54,15 @@ public class PlivoService {
             otpRepository.save(obj);
             Message message=Message.creator(new com.twilio.type.PhoneNumber(to), new com.twilio.type.PhoneNumber(phoneNumber), otp+" "+sendMessage).create();
 //            MessageCreateResponse response = message.creator("8090564705", to, otp+sendMessage);
+            // Check the status of the sent message
+            if (message.getStatus() == Message.Status.FAILED) {
+                // Twilio failed to send the message
+                // Handle the failure accordingly, log it, throw an exception, etc.
+                // For example, you might want to log the error:
+                logger.error("failed to send message. Error code: {}", message.getErrorCode());
+            }
         } catch (Exception ex) {
-            System.out.println("Something went wrong");
+            logger.error("error sending message", ex);
         }
         return otp;
 //        return response;

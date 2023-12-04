@@ -38,7 +38,7 @@ public class PartnerService {
         // Check if the partner already exists
         Partner existingPartner = partnerRepository.findByPartnerPhone(invitePartnerRequestDto.getPhone());
         if (existingPartner != null) {
-            return "Partner with the provided phone number already exists";
+            return "partner with the provided phone number already exists";
         }
 
         // Save the partner
@@ -48,7 +48,7 @@ public class PartnerService {
         newPartner.setPartnerPhone(invitePartnerRequestDto.getPhone());
         partnerRepository.save(newPartner);
 
-        return "Partner invited successfully";
+        return "partner invited successfully";
     }
     public String extractHeader(String header) {
         if (header == null || !header.startsWith("Bearer ")) {

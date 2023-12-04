@@ -21,6 +21,28 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
 		</dependency>
+
+<!--		&lt;!&ndash; SLF4J API &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.slf4j</groupId>-->
+<!--			<artifactId>slf4j-api</artifactId>-->
+<!--			<version>1.7.32</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.slf4j</groupId>-->
+<!--			<artifactId>slf4j-simple</artifactId>-->
+<!--			<version>1.7.32</version> &lt;!&ndash; Use the same version as slf4j-api &ndash;&gt;-->
+<!--		</dependency>-->
+<!--			Assert J library for Unit testing-->
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>3.24.2</version>
+			<scope>test</scope>
+		</dependency>
+
+
+
 		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
 			<artifactId>s3</artifactId>
@@ -37,10 +59,10 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -75,11 +97,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.security</groupId>-->
+<!--			<artifactId>spring-security-test</artifactId>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
@@ -95,11 +117,11 @@
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.5</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-crypto</artifactId>
-			<version>5.6.1</version> <!-- Replace with the desired version -->
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.security</groupId>-->
+<!--			<artifactId>spring-security-crypto</artifactId>-->
+<!--			<version>5.6.1</version> &lt;!&ndash; Replace with the desired version &ndash;&gt;-->
+<!--		</dependency>-->
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 <!--		<dependency>-->
 <!--			<groupId>javax.mail</groupId>-->

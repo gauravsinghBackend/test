@@ -27,13 +27,13 @@ public ResponseEntity<String> sendSms(SmsRequest smsRequest) {
             //It will get Changed for NEW VERSION of Figma
 //            if (user != null) {
                 String otp = plivoService.sendSms(smsRequest.getPhone());
-                return new ResponseEntity<>("OTP generated successfully! " + otp, HttpStatus.OK);
+                return new ResponseEntity<>("otp generated successfully! " + otp, HttpStatus.OK);
 //            } else {
 //                return new ResponseEntity<>("User not found for phone: " + smsRequest.getPhone(), HttpStatus.NOT_FOUND);
 //            }
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<>("Error in generating OTP: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("error in generating OTP: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 //    @PostMapping("/verify")
