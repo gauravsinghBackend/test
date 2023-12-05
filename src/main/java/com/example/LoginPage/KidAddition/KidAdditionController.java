@@ -1,7 +1,10 @@
 package com.example.LoginPage.KidAddition;
 
+import com.example.LoginPage.Config.StringAll;
 import com.example.LoginPage.Encryption.TokenData;
 import com.example.LoginPage.Encryption.TokenManager;
+import com.example.LoginPage.InvitePartner.InvitePartnerResponseDto;
+import com.example.LoginPage.InvitePartner.InvitePartnerStatus;
 import com.example.LoginPage.Models.User;
 import com.example.LoginPage.LoginSignUp.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-public class KidAddition {
+public class KidAdditionController {
     @Autowired
     private TokenManager tokenManager;
     @Autowired
@@ -25,37 +28,16 @@ public class KidAddition {
     @PostMapping("/addkids")
     public ResponseEntity<KidResponseDto>addKid(@RequestHeader("Authorization") String header, @RequestBody KidRequestDto kidRequestDto) throws Exception {
         try {
-            KidResponseDto kidResponseDto=new KidResponseDto();
-            //Validate if Header is null
-            if (header==null) {
-                kidResponseDto.setMeassage("header missing");
-                return new ResponseEntity<>(kidResponseDto,HttpStatus.OK);
-            }
-            String token = header.substring(7);
-            TokenData tokenData = tokenManager.decryptToken(token);
-            if (tokenData==null)
-            {
-                kidResponseDto.setMeassage("incorrect header");
-                return new ResponseEntity<>(kidResponseDto,HttpStatus.OK);
-            }
-            Optional<User> user = userRepository.findById(tokenData.getUserId());
-            //validate if user is null
-            if (user.isEmpty()) {
-                kidResponseDto.setMeassage("user is Invalid or null");
-                return new ResponseEntity<>(kidResponseDto,HttpStatus.OK);
-            }
-            Kid kid=kidService.addKid(user.get(), kidRequestDto.getName(), kidRequestDto.getDob(), kidRequestDto.getProfilePicture(),kidRequestDto.getGender());
-            kidResponseDto.setId(kid.getId());
-            kidResponseDto.setMeassage("kid saved successfully");
-            return new ResponseEntity<>(kidResponseDto, HttpStatus.OK);
+            KidResponseDto kidResponseDto=kidService.addKid(header,kidRequestDto);
+            return new ResponseEntity<>(kidResponseDto,HttpStatus.OK);
         }
         catch (Exception e)
         {
-            throw new Exception();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new KidResponseDto(StringAll.kidAddFailed));
         }
 
     }
-
+    //Will add this method later if delete icon is there
     public void deleteKid(Long kidId) {
         Optional<Kid> optionalKid = kidRepository.findById(kidId);
         if (optionalKid.isPresent()) {
@@ -67,3 +49,4 @@ public class KidAddition {
         }
     }
 }
+

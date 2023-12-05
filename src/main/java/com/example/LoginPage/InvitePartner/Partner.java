@@ -16,4 +16,5 @@ public class Partner {
     @Column(nullable = false)
     private String name;
     private String partnerPhone;
+    public static  String invitePrt = "abc";
 }
